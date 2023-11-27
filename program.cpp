@@ -1,9 +1,12 @@
 #include "SDL2/SDL.h"
-#include "iostream"
 #include "fmt/format.h"
+#include "iostream"
+#include "InputManager.h"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
+
+InputManager* gInputManager;
 
 int main(int argc, char* args[])
 {
@@ -26,6 +29,7 @@ int main(int argc, char* args[])
 		{
 			std::cout << "SDL successfuly initialized!"<<std::endl;
 			screenSurface = SDL_GetWindowSurface(window);
+			gInputManager = new InputManager();
 			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
 			SDL_UpdateWindowSurface(window);
 			SDL_Event e;
@@ -38,6 +42,8 @@ int main(int argc, char* args[])
 					{
 						quit = true;
 					}
+
+					gInputManager->UpdateInputManager(e);
 				}
 			}
 		}
