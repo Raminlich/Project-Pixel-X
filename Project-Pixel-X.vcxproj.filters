@@ -1,22 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
+    <Filter Include="Lib">
+      <UniqueIdentifier>{0cd159e9-f774-4bfc-87d1-c8455a5bd6be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{849cab4f-c9b0-49df-a28b-749f30e52f2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Sources">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
+    <Filter Include="Game\Headers">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Lib\Headers">
+      <UniqueIdentifier>{8fe5642e-41eb-4353-8e0e-87bbbb000ea9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lib\Sources">
+      <UniqueIdentifier>{4bee139c-9782-4f44-acb8-c8b8b2af0243}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="program.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Lib\Sources</Filter>
     </ClCompile>
+    <ClCompile Include="program.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Lib\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureRenderer.cpp">
+      <Filter>Lib\Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameObject.h">
+      <Filter>Lib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Lib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Lib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureRenderer.h">
+      <Filter>Lib\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
