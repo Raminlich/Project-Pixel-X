@@ -15,23 +15,23 @@ KeyBoardInput::~KeyBoardInput()
 
 void KeyBoardInput::HandleInput(const SDL_Event& e)
 {
-	switch (e.type)
+	if (e.key.keysym.sym != mKeyCode) return;
+
+	switch (e.key.state)
 	{
-	case SDL_KEYDOWN:
-		if (e.key.keysym.sym != mKeyCode) break;
-		mIsDown = true;
+	case SDL_PRESSED:
+		mIsPressed = true;
 		break;
 
-	case SDL_KEYUP:
-		if (e.key.keysym.sym != mKeyCode) break;
-		mIsDown = false;
+	case SDL_RELEASED:
+		mIsPressed = false;
 		break;
 	}
 }
 
-bool KeyBoardInput::GetIsDown()
+bool KeyBoardInput::GetIsPressed()
 {
-	return mIsDown;
+	return mIsPressed;
 }
 
 MoveInputHandler::MoveInputHandler()
@@ -52,10 +52,10 @@ void MoveInputHandler::UpdateMoveInput(const SDL_Event& e)
 
 void MoveInputHandler::CalculateMoveInput()
 { 
-	bool up = mUpKey.GetIsDown();
-	bool down = mDownKey.GetIsDown();
-	bool right = mRightKey.GetIsDown();
-	bool left = mLeftKey.GetIsDown();
+	bool up = mUpKey.GetIsPressed();
+	bool down = mDownKey.GetIsPressed();
+	bool right = mRightKey.GetIsPressed();
+	bool left = mLeftKey.GetIsPressed();
 
 
 	if (up && down) 
@@ -111,8 +111,12 @@ InputManager::~InputManager()
 
 }
 
+Vector2 InputManager::GetMoveInput()
+{
+	return mMoveInputHandler.GetMoveInput();
+}
+
 void InputManager::UpdateInputManager(const SDL_Event& e)
 {
-	mMoveInput.UpdateMoveInput(e);
-	std::cout << "Input : " << mMoveInput.GetMoveInput().x << ", " << mMoveInput.GetMoveInput().y << std::endl;
+	mMoveInputHandler.UpdateMoveInput(e);
 }

@@ -7,6 +7,16 @@ struct Vector2
 	Vector2(int x = 0, int y = 0)
 		: x(x), y(y)
 	{
+	}
 
+	Vector2 operator + (Vector2 givenVector)
+	{
+		return Vector2(x + givenVector.x, y + givenVector.y);
+	}
+
+	Vector2 operator * (float multiplyValue)
+	{
+		return Vector2(x * multiplyValue, y * multiplyValue);
 	}
 };
+

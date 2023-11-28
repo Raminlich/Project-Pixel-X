@@ -1,22 +1,23 @@
 #pragma once
 #include "SDL2/SDL.h"
 #include "Vector.h"
+
 #include <iostream>
 
 class KeyBoardInput
 {
 private:
 	SDL_KeyCode mKeyCode = SDLK_UNKNOWN;
-	bool mIsDown = false;
+	bool mIsPressed = false;
 public:
 	KeyBoardInput(SDL_KeyCode keyCode);
 	~KeyBoardInput();
 
-	//For Handling isDown
+	//For Handling is key pressed
 	void HandleInput(const SDL_Event& e);
 
-	//Returns is key Down or not
-	bool GetIsDown();
+	//Returns is key Pressed or not
+	bool GetIsPressed();
 };
 
 //For handling move Input
@@ -44,10 +45,11 @@ public:
 class InputManager
 {
 private:
-	MoveInputHandler mMoveInput;
+	MoveInputHandler mMoveInputHandler;
 public:
 	InputManager();
 	~InputManager();
 
 	void UpdateInputManager(const SDL_Event& e);
+	Vector2 GetMoveInput();
 };
