@@ -26,9 +26,3 @@ void GameObject::Render()
 {
 	mTextureRenderer.Render(mPosition);
 }
-
-void GameObject::Move(Vector2 moveInput)
-{
-	Vector2 moveVector = Vector2(moveInput.x,-moveInput.y) * mMoveSpeed;
-	mPosition = mPosition + (moveVector);
-}

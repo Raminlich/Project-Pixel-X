@@ -75,7 +75,7 @@ bool LoadMedia()
 	//Loading success flag
 	bool success = true;
 
-	gTestGameObject = new GameObject(gRenderer,"Assets/bmp/dot.bmp",Vector2(SCREEN_WIDTH/2,SCREEN_HEIGHT/2));
+	gTestGameObject = new GameObject(gRenderer, "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2));
 
 	return success;
 }
@@ -94,6 +94,13 @@ void Close()
 	//Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
+}
+
+void MoveDot(Vector2 moveInput)
+{
+	float mMoveSpeed = 2.0f;
+	Vector2 moveVector = Vector2(moveInput.x, -moveInput.y) * mMoveSpeed;
+	gTestGameObject->mPosition = gTestGameObject->mPosition + (moveVector);
 }
 
 int main(int argc, char* args[])
@@ -133,7 +140,8 @@ int main(int argc, char* args[])
 					gInputManager->UpdateInputManager(e);
 				}
 
-				gTestGameObject->Move(gInputManager->GetMoveInput());
+				//gTestGameObject->Move(gInputManager->GetMoveInput());
+				MoveDot(gInputManager->GetMoveInput());
 				//Clear screen
 				SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 				SDL_RenderClear(gRenderer);
