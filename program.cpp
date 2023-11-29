@@ -3,6 +3,7 @@
 #include "fmt/format.h"
 #include "InputManager.h"
 #include "GameObject.h"
+#include "Transform.h"
 #include "Vector.h"
 
 #include <iostream>
@@ -14,6 +15,14 @@ SDL_Window* gWindow;
 SDL_Renderer* gRenderer;
 InputManager* gInputManager;
 GameObject* gTestGameObject;
+
+void MoveDot(Vector2 moveInput)
+{
+	float mMoveSpeed = 2.0f;
+	Vector2 moveVector = Vector2(moveInput.x, -moveInput.y) * mMoveSpeed;
+
+	gTestGameObject->transform.Translate(moveVector);
+}
 
 bool Init()
 {
@@ -80,6 +89,41 @@ bool LoadMedia()
 	return success;
 }
 
+void ProgramUpdate()
+{
+	//Main loop flag
+	bool quit = false;
+
+	//Event handler
+	SDL_Event e;
+
+	//While application is running
+	while (!quit)
+	{
+		//Handle events on queue
+		while (SDL_PollEvent(&e) != 0)
+		{
+			//User requests quit
+			if (e.type == SDL_QUIT)
+			{
+				quit = true;
+			}
+
+			gInputManager->UpdateInputManager(e);
+		}
+
+		MoveDot(gInputManager->GetMoveInput());
+
+		//Clear screen
+		SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+		SDL_RenderClear(gRenderer);
+
+		//Update screen
+		gTestGameObject->textureRenderer.Render(gTestGameObject->transform.position);
+		SDL_RenderPresent(gRenderer);
+	}
+}
+
 void Close()
 {
 	//Destroy window	
@@ -94,13 +138,6 @@ void Close()
 	//Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
-}
-
-void MoveDot(Vector2 moveInput)
-{
-	float mMoveSpeed = 2.0f;
-	Vector2 moveVector = Vector2(moveInput.x, -moveInput.y) * mMoveSpeed;
-	gTestGameObject->mPosition = gTestGameObject->mPosition + (moveVector);
 }
 
 int main(int argc, char* args[])
@@ -119,37 +156,7 @@ int main(int argc, char* args[])
 		}
 		else
 		{
-			//Main loop flag
-			bool quit = false;
-
-			//Event handler
-			SDL_Event e;
-
-			//While application is running
-			while (!quit)
-			{
-				//Handle events on queue
-				while (SDL_PollEvent(&e) != 0)
-				{
-					//User requests quit
-					if (e.type == SDL_QUIT)
-					{
-						quit = true;
-					}
-
-					gInputManager->UpdateInputManager(e);
-				}
-
-				//gTestGameObject->Move(gInputManager->GetMoveInput());
-				MoveDot(gInputManager->GetMoveInput());
-				//Clear screen
-				SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-				SDL_RenderClear(gRenderer);
-
-				//Update screen
-				gTestGameObject->Render();
-				SDL_RenderPresent(gRenderer);
-			}
+			ProgramUpdate();
 		}
 	}
 

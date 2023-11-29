@@ -1,29 +1,32 @@
 #pragma once
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include "Component.h"
 #include "Vector.h"
 
 #include <iostream>
 
-class TextureRenderer
+class TextureRenderer : public Component
 {
 private:
 	//SDL_Renderer for window we want to render
 	SDL_Renderer* mRenderer;
-
 	//The actual hardware texture
 	SDL_Texture* mTexture;
 
-	//Image dimensions
-	float mWidth;
-	float mHeight;
-
 public:
+	//Image dimensions
+	float width;
+	float height;
+
 	//Initializes variables
+	TextureRenderer();
 	TextureRenderer(SDL_Renderer* sdlRenderer);
 
 	//Deallocates memory
 	~TextureRenderer();
+
+	void Init(std::string path, Vector2 initialPosition);
 
 	//Loads image at specified path
 	bool LoadFromFile(std::string path);
@@ -42,8 +45,4 @@ public:
 
 	//Renders texture at given point
 	void Render(Vector2 position, SDL_Rect* clip = NULL, double angle = 0.0, SDL_FPoint* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
-
-	//Gets image dimensions
-	float GetWidth();
-	float GetHeight();
 };

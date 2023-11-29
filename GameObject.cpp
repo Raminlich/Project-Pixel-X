@@ -1,28 +1,14 @@
 #include "GameObject.h"
 
-void GameObject::InitTexture(std::string path)
-{
-	mTextureRenderer.LoadFromFile(path);
-	mTextureRenderer.Render(mPosition);
-}
-
 GameObject::GameObject(SDL_Renderer* sdlRenderer,std::string texturePath, Vector2 initialPosition)
-	:mTextureRenderer(sdlRenderer), mPosition(initialPosition)
 {
-	InitTexture(texturePath);
+	transform = Transform(initialPosition);
+	textureRenderer = TextureRenderer(sdlRenderer);
+
+	textureRenderer.Init(texturePath, initialPosition);
 }
 
 GameObject::~GameObject()
 {
 
-}
-
-TextureRenderer GameObject::GetTextureRenderer()
-{
-	return mTextureRenderer;
-}
-
-void GameObject::Render()
-{
-	mTextureRenderer.Render(mPosition);
 }

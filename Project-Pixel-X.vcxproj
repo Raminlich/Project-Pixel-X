@@ -135,11 +135,14 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="program.cpp" />
     <ClCompile Include="TextureRenderer.cpp" />
+    <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Component.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="TextureRenderer.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

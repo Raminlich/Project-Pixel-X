@@ -1,18 +1,34 @@
 #include "TextureRenderer.h"
 
+TextureRenderer::TextureRenderer()
+{
+	//Initialize
+	mRenderer = NULL;
+	mTexture = NULL;
+	width = 0;
+	height = 0;
+}
+
 TextureRenderer::TextureRenderer(SDL_Renderer* sdlRenderer)
 	:mRenderer(sdlRenderer)
 {
 	//Initialize
 	mTexture = NULL;
-	mWidth = 0;
-	mHeight = 0;
+	width = 0;
+	height = 0;
 }
 
 TextureRenderer::~TextureRenderer()
 {
 	//Deallocate
 	Free();
+}
+
+void TextureRenderer::Init(std::string path, Vector2 initialPosition)
+{
+	//Init
+	LoadFromFile(path);
+	Render(initialPosition);
 }
 
 bool TextureRenderer::LoadFromFile(std::string path)
@@ -43,8 +59,8 @@ bool TextureRenderer::LoadFromFile(std::string path)
 		else
 		{
 			//Get image dimensions
-			mWidth = loadedSurface->w;
-			mHeight = loadedSurface->h;
+			width = loadedSurface->w;
+			height = loadedSurface->h;
 		}
 
 		//Get rid of old loaded surface
@@ -63,8 +79,8 @@ void TextureRenderer::Free()
 	{
 		SDL_DestroyTexture(mTexture);
 		mTexture = NULL;
-		mWidth = 0;
-		mHeight = 0;
+		width = 0;
+		height = 0;
 	}
 }
 
@@ -89,7 +105,7 @@ void TextureRenderer::SetAlpha(Uint8 alpha)
 void TextureRenderer::Render(Vector2 position, SDL_Rect* clip, double angle, SDL_FPoint* center, SDL_RendererFlip flip)
 {
 	//Set rendering space and render to screen
-	SDL_FRect renderQuad = { position.x, position.y, mWidth, mHeight };
+	SDL_FRect renderQuad = { position.x, position.y, width, height };
 
 	//Set clip rendering dimensions
 	if (clip != NULL)
@@ -100,14 +116,4 @@ void TextureRenderer::Render(Vector2 position, SDL_Rect* clip, double angle, SDL
 
 	//Render to screen
 	SDL_RenderCopyExF(mRenderer, mTexture, clip, &renderQuad, angle, center, flip);
-}
-
-float TextureRenderer::GetWidth()
-{
-	return mWidth;
-}
-
-float TextureRenderer::GetHeight()
-{
-	return mHeight;
 }
