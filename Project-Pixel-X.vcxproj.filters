@@ -23,11 +23,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Lib\Sources</Filter>
-    </ClCompile>
     <ClCompile Include="program.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Lib\Sources</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Lib\Sources</Filter>
@@ -43,10 +43,10 @@
     <ClInclude Include="InputManager.h">
       <Filter>Lib\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Vector.h">
+    <ClInclude Include="TextureRenderer.h">
       <Filter>Lib\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="TextureRenderer.h">
+    <ClInclude Include="Vector.h">
       <Filter>Lib\Headers</Filter>
     </ClInclude>
   </ItemGroup>
