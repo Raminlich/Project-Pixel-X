@@ -101,6 +101,8 @@ Vector2 MoveInputHandler::GetMoveInput()
 
 #pragma endregion
 
+InputManager* InputManager::inputManager_ = nullptr;
+
 InputManager::InputManager()
 {
 
@@ -114,6 +116,16 @@ InputManager::~InputManager()
 Vector2 InputManager::GetMoveInput()
 {
 	return mMoveInputHandler.GetMoveInput();
+}
+
+InputManager* InputManager::GetInstance()
+{
+	if(inputManager_ == nullptr)
+	{
+		inputManager_ = new InputManager();
+	}
+
+	return inputManager_;
 }
 
 void InputManager::UpdateInputManager(const SDL_Event& e)

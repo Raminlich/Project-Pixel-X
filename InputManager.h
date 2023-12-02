@@ -46,9 +46,17 @@ class InputManager
 {
 private:
 	MoveInputHandler mMoveInputHandler;
-public:
+
 	InputManager();
 	~InputManager();
+	static InputManager* inputManager_;
+
+public:
+	
+	InputManager(InputManager& other) = delete;
+	void operator = (const InputManager& other) = delete;
+
+	static InputManager* GetInstance();
 
 	void UpdateInputManager(const SDL_Event& e);
 	Vector2 GetMoveInput();

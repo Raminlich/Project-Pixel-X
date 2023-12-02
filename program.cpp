@@ -75,7 +75,7 @@ bool Init()
 		}
 	}
 
-	gInputManager = new InputManager();
+	gInputManager = InputManager::GetInstance();
 	return success;
 }
 

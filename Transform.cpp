@@ -5,7 +5,7 @@ Transform::Transform()
 {
 }
 
-Transform::Transform(Vector2 initialPosition)
+Transform::Transform(const Vector2& initialPosition)
 	:position(initialPosition)
 {
 	
