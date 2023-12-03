@@ -5,6 +5,7 @@ GameObject::GameObject(SDL_Renderer* sdlRenderer,std::string texturePath, Vector
 	transform = Transform(initialPosition);
 	textureRenderer = TextureRenderer(sdlRenderer);
 
+	//not here !
 	textureRenderer.Init(texturePath, initialPosition);
 }
 

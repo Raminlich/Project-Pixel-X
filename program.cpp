@@ -22,6 +22,23 @@ void MoveDot(Vector2 moveInput)
 	Vector2 moveVector = Vector2(moveInput.x, -moveInput.y) * mMoveSpeed;
 
 	gTestGameObject->transform.Translate(moveVector);
+	if (Vector2::Magnitude(moveInput) == 0) return;
+	gTestGameObject->transform.LookAt(moveInput);
+
+	/*if (moveInput.x < 0) 
+	{
+		gTestGameObject->textureRenderer.flip = SDL_FLIP_VERTICAL;
+	}
+	else if(moveInput.x > 0)
+	{
+		gTestGameObject->textureRenderer.flip = SDL_FLIP_NONE;
+	}*/
+}
+
+
+void RotateDot(double value)
+{
+	gTestGameObject->transform.Rotate(value);
 }
 
 bool Init()
@@ -85,7 +102,6 @@ bool LoadMedia()
 	bool success = true;
 
 	gTestGameObject = new GameObject(gRenderer, "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2));
-
 	return success;
 }
 
@@ -119,7 +135,7 @@ void ProgramUpdate()
 		SDL_RenderClear(gRenderer);
 
 		//Update screen
-		gTestGameObject->textureRenderer.Render(gTestGameObject->transform.position);
+		gTestGameObject->textureRenderer.Render(gTestGameObject->transform.position, gTestGameObject->transform.rotation);
 		SDL_RenderPresent(gRenderer);
 	}
 }

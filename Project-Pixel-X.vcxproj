@@ -136,6 +136,7 @@
     <ClCompile Include="program.cpp" />
     <ClCompile Include="TextureRenderer.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h" />

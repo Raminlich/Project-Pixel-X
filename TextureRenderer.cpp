@@ -7,6 +7,7 @@ TextureRenderer::TextureRenderer()
 	mTexture = NULL;
 	width = 0;
 	height = 0;
+	flip = SDL_FLIP_NONE;
 }
 
 TextureRenderer::TextureRenderer(SDL_Renderer* sdlRenderer)
@@ -16,6 +17,7 @@ TextureRenderer::TextureRenderer(SDL_Renderer* sdlRenderer)
 	mTexture = NULL;
 	width = 0;
 	height = 0;
+	flip = SDL_FLIP_NONE;
 }
 
 TextureRenderer::~TextureRenderer()
@@ -102,7 +104,7 @@ void TextureRenderer::SetAlpha(Uint8 alpha)
 	SDL_SetTextureAlphaMod(mTexture, alpha);
 }
 
-void TextureRenderer::Render(Vector2 position, SDL_Rect* clip, double angle, SDL_FPoint* center, SDL_RendererFlip flip)
+void TextureRenderer::Render(Vector2 position, double angle , SDL_Rect* clip, SDL_FPoint* center)
 {
 	//Set rendering space and render to screen
 	SDL_FRect renderQuad = { position.x, position.y, width, height };

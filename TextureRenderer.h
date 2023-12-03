@@ -18,6 +18,7 @@ public:
 	//Image dimensions
 	float width;
 	float height;
+	SDL_RendererFlip flip;
 
 	//Initializes variables
 	TextureRenderer();
@@ -26,6 +27,7 @@ public:
 	//Deallocates memory
 	~TextureRenderer();
 
+	//Initialize component
 	void Init(std::string path, Vector2 initialPosition);
 
 	//Loads image at specified path
@@ -44,5 +46,5 @@ public:
 	void SetAlpha(Uint8 alpha);
 
 	//Renders texture at given point
-	void Render(Vector2 position, SDL_Rect* clip = NULL, double angle = 0.0, SDL_FPoint* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
+	void Render(Vector2 position, double angle = 0.0, SDL_Rect* clip = NULL, SDL_FPoint* center = NULL);
 };
