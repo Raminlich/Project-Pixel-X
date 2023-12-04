@@ -71,12 +71,15 @@ static Vector2 WorldToSDL(Vector2& v)
 
 void Vector2::Rotate(float angle)
 {
-	float radians = angle * M_PI / 180.0f;  // Convert degrees to radians
+	float radians = -angle * M_PI / 180.0f;  // Convert degrees to radians
 	float cosTheta = cos(radians);
 	float sinTheta = sin(radians);
 
 	float newX = x * cosTheta - y * sinTheta;
 	float newY = x * sinTheta + y * cosTheta;
+
+	if (std::fabs(newX) < std::numeric_limits<float>::epsilon()) newX = 0.0f; // Account for floating point precision
+	if (std::fabs(newY) < std::numeric_limits<float>::epsilon()) newY = 0.0f; // Account for floating point precision
 
 	x = newX;
 	y = newY;

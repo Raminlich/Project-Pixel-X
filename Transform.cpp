@@ -36,4 +36,5 @@ void Transform::LookAt(Vector2 lookDirection)
 	up.Rotate(angle);
 	right = Vector2::RIGHT;
 	right.Rotate(angle);
+	std::cout << right << std::endl;
 }
