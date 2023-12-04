@@ -18,12 +18,17 @@ GameObject* gTestGameObject;
 
 void MoveDot(Vector2 moveInput)
 {
-	float mMoveSpeed = 2.0f;
-	Vector2 moveVector = Vector2(moveInput.x, -moveInput.y) * mMoveSpeed;
+	float moveSpeed = 2.0f;
+	moveInput.Normalize();
 
+	Vector2 moveVector = moveInput * moveSpeed;
+	moveVector = Vector2::WorldToSDL(moveVector);
 	gTestGameObject->transform.Translate(moveVector);
+
 	if (Vector2::Magnitude(moveInput) == 0) return;
-	gTestGameObject->transform.LookAt(moveInput);
+	Vector2 lookDirection = Vector2::Lerp(gTestGameObject->transform.up, moveInput, 0.1f);
+
+	gTestGameObject->transform.LookAt(lookDirection);
 
 	/*if (moveInput.x < 0) 
 	{

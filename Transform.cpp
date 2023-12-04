@@ -29,12 +29,17 @@ void Transform::Rotate(const double& rotationValue)
 
 void Transform::LookAt(Vector2 lookDirection)
 {
-	float angle = Vector2::FindAngle(Vector2(0,1), lookDirection);
+	float angle = Vector2::FindAngle(Vector2::UP, lookDirection);
 	rotation = angle;
 
+	HandleDirection();
+}
+
+void Transform::HandleDirection()
+{
 	up = Vector2::UP;
-	up.Rotate(angle);
+	up.Rotate(rotation);
+
 	right = Vector2::RIGHT;
-	right.Rotate(angle);
-	std::cout << right << std::endl;
+	right.Rotate(rotation);
 }

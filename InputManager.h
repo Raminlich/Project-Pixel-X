@@ -29,7 +29,7 @@ private:
 	KeyBoardInput mDownKey = KeyBoardInput(SDLK_DOWN);
 	KeyBoardInput mRightKey = KeyBoardInput(SDLK_RIGHT);
 	KeyBoardInput mLeftKey = KeyBoardInput(SDLK_LEFT);
-	Vector2 mMoveInput;
+	Vector2 mMoveInput = Vector2(0,0);
 
 public:
 	MoveInputHandler();

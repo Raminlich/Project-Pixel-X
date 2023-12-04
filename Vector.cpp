@@ -4,7 +4,7 @@ const Vector2 Vector2::UP = Vector2(0, 1);
 const Vector2 Vector2::RIGHT = Vector2(1, 0);
 
 
-Vector2::Vector2(int x, int y)
+Vector2::Vector2(float x, float y)
 	: x(x), y(y)
 {
 }
@@ -13,6 +13,12 @@ Vector2 Vector2::operator + (const Vector2& givenVector)
 {
 	return Vector2(x + givenVector.x, y + givenVector.y);
 }
+
+Vector2 Vector2::operator - (const Vector2& givenVector)
+{
+	return Vector2(x - givenVector.x, y - givenVector.y);
+}
+
 Vector2 Vector2::operator * (float multiplyValue)
 {
 	return Vector2(x * multiplyValue, y * multiplyValue);
@@ -48,7 +54,7 @@ float Vector2::FindAngle(const Vector2& v1, const Vector2& v2)
 
 	// Account for directional ambiguity
 	float crossProduct = CrossProduct(v1, v2);
-	if (crossProduct < 0) 
+	if (crossProduct < 0)
 	{
 		angleInRadians = 2 * M_PI - angleInRadians;
 	}
@@ -58,15 +64,20 @@ float Vector2::FindAngle(const Vector2& v1, const Vector2& v2)
 	float angleInDegrees = angleInRadians * 180.0f / M_PI;
 	if (std::fabs(angleInDegrees) < std::numeric_limits<float>::epsilon()) return 0.0f; // Account for floating point precision
 
-	
+
 	angleInDegrees = 360.0f - angleInDegrees; // Convert to clockwise angle
 
 	return angleInDegrees;
 }
 
-static Vector2 WorldToSDL(Vector2& v) 
+Vector2 Vector2::Lerp(Vector2 v1, Vector2 v2, float interpolateValue)
 {
-	return Vector2(v.x , -v.y);
+	return v1 + (v2 - v1) * interpolateValue;
+}
+
+Vector2 Vector2::WorldToSDL(const Vector2& v)
+{
+	return Vector2(v.x, -v.y);
 }
 
 void Vector2::Rotate(float angle)
@@ -88,6 +99,7 @@ void Vector2::Rotate(float angle)
 void Vector2::Normalize()
 {
 	float magnitudeProduct = Magnitude(*this);
+	if (magnitudeProduct == 0) return; //Check for zero vectors
 	x /= magnitudeProduct;
 	y /= magnitudeProduct;
 }
@@ -98,8 +110,6 @@ Vector2 Vector2::Nomralized()
 	copyVector.Normalize();
 	return copyVector;
 }
-
-
 
 std::ostream& operator<<(std::ostream& stream, const Vector2& vector2)
 {

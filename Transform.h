@@ -26,5 +26,7 @@ public:
 
 	//Rotate to look at given direction
 	void LookAt(Vector2 lookDirecton);
+
+	void HandleDirection();
 };
 
