@@ -104,7 +104,7 @@ void TextureRenderer::SetAlpha(Uint8 alpha)
 	SDL_SetTextureAlphaMod(mTexture, alpha);
 }
 
-void TextureRenderer::Render(Vector2 position, double angle , SDL_Rect* clip, SDL_FPoint* center)
+void TextureRenderer::Render(Vector2 position, float angle, const Vector2& scale, SDL_Rect* clip, SDL_FPoint* center)
 {
 	//Set rendering space and render to screen
 	SDL_FRect renderQuad = { position.x, position.y, width, height };
@@ -115,6 +115,9 @@ void TextureRenderer::Render(Vector2 position, double angle , SDL_Rect* clip, SD
 		renderQuad.w = clip->w;
 		renderQuad.h = clip->h;
 	}
+
+	renderQuad.w *= scale.x;
+	renderQuad.h *= scale.y;
 
 	//Render to screen
 	SDL_RenderCopyExF(mRenderer, mTexture, clip, &renderQuad, angle, center, flip);

@@ -26,24 +26,22 @@ void MoveDot(Vector2 moveInput)
 	gTestGameObject->transform.Translate(moveVector);
 
 	if (Vector2::Magnitude(moveInput) == 0) return;
-	Vector2 lookDirection = Vector2::Lerp(gTestGameObject->transform.up, moveInput, 0.1f);
+	Vector2 lookDirection = Vector2::Lerp(gTestGameObject->transform.GetUp(), moveInput, 0.1f);
 
 	gTestGameObject->transform.LookAt(lookDirection);
-
-	/*if (moveInput.x < 0) 
-	{
-		gTestGameObject->textureRenderer.flip = SDL_FLIP_VERTICAL;
-	}
-	else if(moveInput.x > 0)
-	{
-		gTestGameObject->textureRenderer.flip = SDL_FLIP_NONE;
-	}*/
 }
 
-
-void RotateDot(double value)
+void MoveDot2(Vector2 moveInput) 
 {
-	gTestGameObject->transform.Rotate(value);
+	if (moveInput.y == 0) return;
+	float moveSpeed = 2.0f;
+	float rotationSpeed = 2.0f;
+
+	Vector2 moveVector = gTestGameObject->transform.GetUp() * moveInput.y * moveSpeed;
+	moveVector = Vector2::WorldToSDL(moveVector);
+	gTestGameObject->transform.Translate(moveVector);
+
+	gTestGameObject->transform.Rotate(moveInput.x * rotationSpeed);
 }
 
 bool Init()
@@ -133,14 +131,15 @@ void ProgramUpdate()
 			gInputManager->UpdateInputManager(e);
 		}
 
-		MoveDot(gInputManager->GetMoveInput());
+		MoveDot2(gInputManager->GetMoveInput());
 
 		//Clear screen
 		SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 		SDL_RenderClear(gRenderer);
 
 		//Update screen
-		gTestGameObject->textureRenderer.Render(gTestGameObject->transform.position, gTestGameObject->transform.rotation);
+		Transform testTransform = gTestGameObject->transform;
+		gTestGameObject->textureRenderer.Render(testTransform.GetPosition(), testTransform.GetRotation(), testTransform.GetScale());
 		SDL_RenderPresent(gRenderer);
 	}
 }

@@ -1,12 +1,12 @@
 #include "Transform.h"
 
 Transform::Transform()
-	:position(Vector2(0, 0)), rotation(0)
+	:mPosition(Vector2(0, 0)), mRotation(0)
 {
 }
 
 Transform::Transform(const Vector2& initialPosition)
-	:position(initialPosition), rotation(0)
+	:mPosition(initialPosition), mRotation(0)
 {
 	
 }
@@ -15,31 +15,82 @@ Transform::~Transform()
 {
 }
 
-void Transform::Translate(const Vector2& translateVector)
+Vector2 Transform::GetPosition()
 {
-	position += translateVector;
+	return mPosition;
 }
 
-void Transform::Rotate(const double& rotationValue)
+float Transform::GetRotation()
 {
-	rotation += rotationValue;
-	up.Rotate(rotationValue);
-	right.Rotate(rotationValue);
+	return mRotation;
+}
+
+Vector2 Transform::GetScale()
+{
+	return mScale;
+}
+
+Vector2 Transform::GetUp()
+{
+	return mUp;
+}
+
+Vector2 Transform::GetRight()
+{
+	return mRight;
+}
+
+void Transform::SetPosition(const Vector2& position)
+{
+	mPosition = position;
+}
+
+void Transform::SetRotation(float rotation)
+{
+	mRotation = rotation;
+	HandleDirection();
+}
+
+void Transform::SetScale(const Vector2& scale)
+{
+	mScale = scale;
+}
+
+void Transform::SetUp(const Vector2& up)
+{
+	float angle = Vector2::FindAngle(mUp,up);
+	Rotate(angle);
+}
+
+void Transform::SetRight(const Vector2& right)
+{
+	float angle = Vector2::FindAngle(mRight, right);
+	Rotate(angle);
+}
+
+void Transform::Translate(const Vector2& translateVector)
+{
+	Vector2 newPosition = mPosition + translateVector;
+	SetPosition(newPosition);
+}
+
+void Transform::Rotate(const float& rotationValue)
+{
+	float newRotation = mRotation + rotationValue;
+	SetRotation(newRotation);
 }
 
 void Transform::LookAt(Vector2 lookDirection)
 {
 	float angle = Vector2::FindAngle(Vector2::UP, lookDirection);
-	rotation = angle;
-
-	HandleDirection();
+	SetRotation(angle);
 }
 
 void Transform::HandleDirection()
 {
-	up = Vector2::UP;
-	up.Rotate(rotation);
+	mUp = Vector2::UP;
+	mUp.Rotate(mRotation);
 
-	right = Vector2::RIGHT;
-	right.Rotate(rotation);
+	mRight = Vector2::RIGHT;
+	mRight.Rotate(mRotation);
 }

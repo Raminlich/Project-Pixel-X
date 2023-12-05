@@ -46,5 +46,5 @@ public:
 	void SetAlpha(Uint8 alpha);
 
 	//Renders texture at given point
-	void Render(Vector2 position, double angle = 0.0, SDL_Rect* clip = NULL, SDL_FPoint* center = NULL);
+	void Render(Vector2 position, float angle = 0.0f,const Vector2& scale = Vector2(1,1), SDL_Rect* clip = NULL, SDL_FPoint* center = NULL);
 };
