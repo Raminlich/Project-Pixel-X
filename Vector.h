@@ -14,6 +14,7 @@ public:
 	Vector2 operator + (const Vector2& givenVector);
 	Vector2 operator - (const Vector2& givenVector);
 	Vector2 operator * (float multiplyValue);
+	Vector2 operator / (float divideValue);
 	void operator += (const Vector2& givenVector);
 
 	//Returns magnitude of Vector2

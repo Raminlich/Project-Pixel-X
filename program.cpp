@@ -2,6 +2,7 @@
 #include "SDL2/SDL_image.h"
 #include "fmt/format.h"
 #include "InputManager.h"
+#include "ObjectManager.h"
 #include "GameObject.h"
 #include "Transform.h"
 #include "Vector.h"
@@ -15,6 +16,9 @@ SDL_Window* gWindow;
 SDL_Renderer* gRenderer;
 InputManager* gInputManager;
 GameObject* gTestGameObject;
+GameObject* gTestGameObject2;
+GameObject* gTestGameObject3;
+
 
 void MoveDot(Vector2 moveInput)
 {
@@ -23,12 +27,12 @@ void MoveDot(Vector2 moveInput)
 
 	Vector2 moveVector = moveInput * moveSpeed;
 	moveVector = Vector2::WorldToSDL(moveVector);
-	gTestGameObject->transform.Translate(moveVector);
+	gTestGameObject->transform->Translate(moveVector);
 
 	if (Vector2::Magnitude(moveInput) == 0) return;
-	Vector2 lookDirection = Vector2::Lerp(gTestGameObject->transform.GetUp(), moveInput, 0.1f);
+	Vector2 lookDirection = Vector2::Lerp(gTestGameObject->transform->GetUp(), moveInput, 0.1f);
 
-	gTestGameObject->transform.LookAt(lookDirection);
+	gTestGameObject->transform->LookAt(lookDirection);
 }
 
 void MoveDot2(Vector2 moveInput) 
@@ -37,11 +41,11 @@ void MoveDot2(Vector2 moveInput)
 	float moveSpeed = 2.0f;
 	float rotationSpeed = 2.0f;
 
-	Vector2 moveVector = gTestGameObject->transform.GetUp() * moveInput.y * moveSpeed;
+	Vector2 moveVector = gTestGameObject->transform->GetUp() * moveInput.y * moveSpeed;
 	moveVector = Vector2::WorldToSDL(moveVector);
-	gTestGameObject->transform.Translate(moveVector);
+	gTestGameObject->transform->Translate(moveVector);
 
-	gTestGameObject->transform.Rotate(moveInput.x * rotationSpeed);
+	gTestGameObject->transform->Rotate(moveInput.x * rotationSpeed);
 }
 
 bool Init()
@@ -104,7 +108,10 @@ bool LoadMedia()
 	//Loading success flag
 	bool success = true;
 
-	gTestGameObject = new GameObject(gRenderer, "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2));
+	gTestGameObject = new GameObject(gRenderer, "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), nullptr);
+	gTestGameObject2 = new GameObject(gRenderer, "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 + 30, SCREEN_HEIGHT / 2 + 30), gTestGameObject->transform);
+	gTestGameObject3 = new GameObject(gRenderer, "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 -30 , SCREEN_HEIGHT / 2 + 30), gTestGameObject2->transform);
+
 	return success;
 }
 
@@ -138,8 +145,15 @@ void ProgramUpdate()
 		SDL_RenderClear(gRenderer);
 
 		//Update screen
-		Transform testTransform = gTestGameObject->transform;
-		gTestGameObject->textureRenderer.Render(testTransform.GetPosition(), testTransform.GetRotation(), testTransform.GetScale());
+		Transform* testTransform = gTestGameObject->transform;
+		Transform* testTransform2 = gTestGameObject2->transform;
+		Transform* testTransform3 = gTestGameObject3->transform;
+
+		gTestGameObject->textureRenderer->Render(testTransform->GetPosition(), testTransform->GetRotation(), testTransform->GetScale());
+		gTestGameObject2->textureRenderer->Render(testTransform2->GetPosition(), testTransform2->GetRotation(), testTransform2->GetScale());
+		gTestGameObject3->textureRenderer->Render(testTransform3->GetPosition(), testTransform3->GetRotation(), testTransform3->GetScale());
+
+
 		SDL_RenderPresent(gRenderer);
 	}
 }
@@ -149,8 +163,8 @@ void Close()
 	//Destroy window	
 	SDL_DestroyRenderer(gRenderer);
 	SDL_DestroyWindow(gWindow);
-	gWindow = NULL;
-	gRenderer = NULL;
+	gWindow = nullptr;
+	gRenderer = nullptr;
 
 	//Destroy GameObjects
 	delete gTestGameObject;

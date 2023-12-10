@@ -6,6 +6,8 @@
 
 #include <iostream>
 
+class GameObject;
+
 class TextureRenderer : public Component
 {
 private:
@@ -21,14 +23,13 @@ public:
 	SDL_RendererFlip flip;
 
 	//Initializes variables
-	TextureRenderer();
-	TextureRenderer(SDL_Renderer* sdlRenderer);
+	TextureRenderer(GameObject* gameObject ,SDL_Renderer* sdlRenderer, std::string texturePath);
 
 	//Deallocates memory
 	~TextureRenderer();
 
 	//Initialize component
-	void Init(std::string path, Vector2 initialPosition);
+	void Init(std::string path);
 
 	//Loads image at specified path
 	bool LoadFromFile(std::string path);

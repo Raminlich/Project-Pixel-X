@@ -24,6 +24,11 @@ Vector2 Vector2::operator * (float multiplyValue)
 	return Vector2(x * multiplyValue, y * multiplyValue);
 }
 
+Vector2 Vector2::operator / (float divideValue)
+{
+	return Vector2(x /  divideValue, y / divideValue);
+}
+
 void Vector2::operator+=(const Vector2& givenVector)
 {
 	*this = *this + givenVector;

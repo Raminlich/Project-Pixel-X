@@ -7,9 +7,9 @@
 class GameObject
 {
 public:
-	Transform transform;
-	TextureRenderer textureRenderer;
-	
-	GameObject(SDL_Renderer* sdlRenderer,std::string texturePath,Vector2 initialPosition);
+	Transform* transform;
+	TextureRenderer* textureRenderer;
+
+	GameObject(SDL_Renderer* sdlRenderer, std::string texturePath, Vector2 initialPosition, Transform* parentTransform);
 	virtual ~GameObject();
 };

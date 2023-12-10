@@ -128,6 +128,12 @@ InputManager* InputManager::GetInstance()
 	return inputManager_;
 }
 
+void InputManager::ResetInstance()
+{
+	delete inputManager_;
+	inputManager_ = nullptr;
+}
+
 void InputManager::UpdateInputManager(const SDL_Event& e)
 {
 	mMoveInputHandler.UpdateMoveInput(e);

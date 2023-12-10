@@ -1,33 +1,70 @@
 #include "Transform.h"
+#include "GameObject.h"
 
-Transform::Transform()
-	:mPosition(Vector2(0, 0)), mRotation(0)
+Transform::Transform(GameObject* gameObject, const Vector2& initialPosition, Transform* parentTransform)
+	:Component(gameObject), mGlobalPosition(initialPosition), mGlobalRotation(0), mParent(parentTransform)
 {
-}
-
-Transform::Transform(const Vector2& initialPosition)
-	:mPosition(initialPosition), mRotation(0)
-{
-	
+	if (mParent != nullptr)
+	{
+		mParent->mChildrenTransform.emplace_back(this);
+	}
 }
 
 Transform::~Transform()
 {
+
 }
 
 Vector2 Transform::GetPosition()
 {
-	return mPosition;
+	return mGlobalPosition;
+}
+
+Vector2 Transform::GetLocalPosition()
+{
+	if (mParent == nullptr) 
+	{
+		return mGlobalPosition;
+	}
+	else
+	{
+		return mGlobalPosition - mParent->GetPosition();
+	}
 }
 
 float Transform::GetRotation()
 {
-	return mRotation;
+	return mGlobalRotation;
+}
+
+float Transform::GetLocalRotation()
+{
+	if (mParent == nullptr)
+	{
+		return mGlobalRotation;
+	}
+	else
+	{
+		return mGlobalRotation - mParent->GetRotation();
+	}
 }
 
 Vector2 Transform::GetScale()
 {
-	return mScale;
+	return mGlobalScale;
+}
+
+Vector2 Transform::GetLocalScale()
+{
+	if (mParent == nullptr)
+	{
+		return mGlobalScale;
+	}
+	else
+	{
+		Vector2 parentScale = mParent->GetScale();
+		return Vector2(mGlobalScale.x / parentScale.x, mGlobalScale.y / parentScale.y);
+	}
 }
 
 Vector2 Transform::GetUp()
@@ -42,23 +79,74 @@ Vector2 Transform::GetRight()
 
 void Transform::SetPosition(const Vector2& position)
 {
-	mPosition = position;
+	for (Transform* childTransform : mChildrenTransform)
+	{
+		childTransform->SetPosition(childTransform->GetLocalPosition() + position);
+	}
+	mGlobalPosition = position;
+}
+
+void Transform::SetLocalPosition(const Vector2& position)
+{
+	if (mParent == nullptr) 
+	{
+		SetPosition(position);
+	}
+	else
+	{
+		SetPosition(mParent->GetPosition() + position);
+	}
 }
 
 void Transform::SetRotation(float rotation)
 {
-	mRotation = rotation;
+	for (Transform* childTransform : mChildrenTransform)
+	{
+		childTransform->SetRotation(childTransform->GetLocalRotation() + rotation);
+	}
+	mGlobalRotation = rotation;
+
 	HandleDirection();
+}
+
+void Transform::SetLocalRotation(float rotation)
+{
+	if (mParent == nullptr)
+	{
+		SetRotation(rotation);
+	}
+	else
+	{
+		SetRotation(mParent->GetRotation() + rotation);
+	}
 }
 
 void Transform::SetScale(const Vector2& scale)
 {
-	mScale = scale;
+	for (Transform* childTransform : mChildrenTransform)
+	{
+		Vector2 childScale = childTransform->GetLocalScale();
+		childTransform->SetScale(Vector2(childScale.x * scale.x, childScale.y * scale.y));
+	}
+	mGlobalScale = scale;
+}
+
+void Transform::SetLocalScale(const Vector2& scale)
+{
+	if (mParent == nullptr)
+	{
+		SetScale(scale);
+	}
+	else
+	{
+		Vector2 parentScale = mParent->GetScale();
+		SetScale(Vector2(parentScale.x * scale.x, parentScale.y * scale.y));
+	}
 }
 
 void Transform::SetUp(const Vector2& up)
 {
-	float angle = Vector2::FindAngle(mUp,up);
+	float angle = Vector2::FindAngle(mUp, up);
 	Rotate(angle);
 }
 
@@ -68,15 +156,35 @@ void Transform::SetRight(const Vector2& right)
 	Rotate(angle);
 }
 
+void Transform::SetParent(Transform* newParentTransform)
+{
+	if (mParent != nullptr)
+	{
+		std::vector<Transform*>::iterator iterator;
+		iterator = remove(newParentTransform->mChildrenTransform.begin(), newParentTransform->mChildrenTransform.end(), this);
+	}
+
+	mParent = newParentTransform;
+	if (newParentTransform != nullptr)
+	{
+		mParent->mChildrenTransform.emplace_back(this);
+	}
+}
+
+const std::vector<Transform*>& Transform::GetChilderen()
+{
+	return mChildrenTransform;
+}
+
 void Transform::Translate(const Vector2& translateVector)
 {
-	Vector2 newPosition = mPosition + translateVector;
+	Vector2 newPosition = mGlobalPosition + translateVector;
 	SetPosition(newPosition);
 }
 
 void Transform::Rotate(const float& rotationValue)
 {
-	float newRotation = mRotation + rotationValue;
+	float newRotation = mGlobalRotation + rotationValue;
 	SetRotation(newRotation);
 }
 
@@ -89,8 +197,8 @@ void Transform::LookAt(Vector2 lookDirection)
 void Transform::HandleDirection()
 {
 	mUp = Vector2::UP;
-	mUp.Rotate(mRotation);
+	mUp.Rotate(mGlobalRotation);
 
 	mRight = Vector2::RIGHT;
-	mRight.Rotate(mRotation);
+	mRight.Rotate(mGlobalRotation);
 }

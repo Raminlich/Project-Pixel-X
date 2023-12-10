@@ -1,23 +1,11 @@
 #include "TextureRenderer.h"
+#include "GameObject.h"
 
-TextureRenderer::TextureRenderer()
+TextureRenderer::TextureRenderer(GameObject* gameObject,SDL_Renderer* sdlRenderer, std::string texturePath)
+	: Component(gameObject) ,mRenderer(sdlRenderer)
 {
 	//Initialize
-	mRenderer = NULL;
-	mTexture = NULL;
-	width = 0;
-	height = 0;
-	flip = SDL_FLIP_NONE;
-}
-
-TextureRenderer::TextureRenderer(SDL_Renderer* sdlRenderer)
-	:mRenderer(sdlRenderer)
-{
-	//Initialize
-	mTexture = NULL;
-	width = 0;
-	height = 0;
-	flip = SDL_FLIP_NONE;
+	Init(texturePath);
 }
 
 TextureRenderer::~TextureRenderer()
@@ -26,11 +14,12 @@ TextureRenderer::~TextureRenderer()
 	Free();
 }
 
-void TextureRenderer::Init(std::string path, Vector2 initialPosition)
+void TextureRenderer::Init(std::string path)
 {
 	//Init
 	LoadFromFile(path);
-	Render(initialPosition);
+	Render(mGameObject->transform->GetPosition());
+	flip = SDL_FLIP_NONE;
 }
 
 bool TextureRenderer::LoadFromFile(std::string path)

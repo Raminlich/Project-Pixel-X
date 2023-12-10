@@ -1,8 +1,12 @@
 #pragma once
 
+class GameObject;
+
 class Component
 {
 public:
-	Component(){}
-	virtual ~Component(){}
+	GameObject* mGameObject = nullptr;
+
+	Component(GameObject* gameObject);
+	virtual ~Component();
 };

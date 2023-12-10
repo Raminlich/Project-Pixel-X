@@ -57,6 +57,7 @@ public:
 	void operator = (const InputManager& other) = delete;
 
 	static InputManager* GetInstance();
+	static void ResetInstance();
 
 	void UpdateInputManager(const SDL_Event& e);
 	Vector2 GetMoveInput();
