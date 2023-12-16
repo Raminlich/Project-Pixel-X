@@ -3,11 +3,8 @@
 #include "Component.h"
 #include "Vector.h"
 
-#include <cmath>
 #include <iostream>
 #include <vector>
-
-class GameObject;
 
 class Transform : public Component 
 {
@@ -24,8 +21,11 @@ private :
 
 public:
 
-	Transform(GameObject* gameObject,const Vector2& initialPosition, Transform* parentTransform = nullptr);
+	Transform(GameObject* gameObject,const Vector2& initialPosition, float initialRotation, Transform* parentTransform = nullptr);
 	~Transform();
+
+	//Get parent of object
+	const Transform* const GetParent();
 
 	//Get position of object
 	Vector2 GetPosition();
@@ -78,7 +78,7 @@ public:
 	//Set parent for our transform
 	void SetParent(Transform* newParentTransform);
 
-	//Returns all childerens of object
+	//Returns all childrens of object
 	const std::vector<Transform*>& GetChilderen();
 
 	//Move with the translateVector

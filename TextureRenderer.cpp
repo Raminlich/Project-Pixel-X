@@ -1,4 +1,5 @@
 #include "TextureRenderer.h"
+#include "Transform.h"
 #include "GameObject.h"
 
 TextureRenderer::TextureRenderer(GameObject* gameObject,SDL_Renderer* sdlRenderer, std::string texturePath)
@@ -18,7 +19,7 @@ void TextureRenderer::Init(std::string path)
 {
 	//Init
 	LoadFromFile(path);
-	Render(mGameObject->transform->GetPosition());
+	Render(gameObject->transform->GetPosition());
 	flip = SDL_FLIP_NONE;
 }
 

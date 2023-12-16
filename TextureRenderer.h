@@ -6,8 +6,6 @@
 
 #include <iostream>
 
-class GameObject;
-
 class TextureRenderer : public Component
 {
 private:

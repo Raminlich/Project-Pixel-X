@@ -14,8 +14,7 @@ const float SCREEN_HEIGHT = 480;
 
 SDL_Window* gWindow;
 SDL_Renderer* gRenderer;
-InputManager* gInputManager;
-GameObject* gTestGameObject;
+GameObject* gTestGameObject1;
 GameObject* gTestGameObject2;
 GameObject* gTestGameObject3;
 
@@ -27,12 +26,12 @@ void MoveDot(Vector2 moveInput)
 
 	Vector2 moveVector = moveInput * moveSpeed;
 	moveVector = Vector2::WorldToSDL(moveVector);
-	gTestGameObject->transform->Translate(moveVector);
+	gTestGameObject1->transform->Translate(moveVector);
 
 	if (Vector2::Magnitude(moveInput) == 0) return;
-	Vector2 lookDirection = Vector2::Lerp(gTestGameObject->transform->GetUp(), moveInput, 0.1f);
+	Vector2 lookDirection = Vector2::Lerp(gTestGameObject1->transform->GetUp(), moveInput, 0.1f);
 
-	gTestGameObject->transform->LookAt(lookDirection);
+	gTestGameObject1->transform->LookAt(lookDirection);
 }
 
 void MoveDot2(Vector2 moveInput) 
@@ -41,11 +40,11 @@ void MoveDot2(Vector2 moveInput)
 	float moveSpeed = 2.0f;
 	float rotationSpeed = 2.0f;
 
-	Vector2 moveVector = gTestGameObject->transform->GetUp() * moveInput.y * moveSpeed;
+	Vector2 moveVector = gTestGameObject1->transform->GetUp() * moveInput.y * moveSpeed;
 	moveVector = Vector2::WorldToSDL(moveVector);
-	gTestGameObject->transform->Translate(moveVector);
+	gTestGameObject1->transform->Translate(moveVector);
 
-	gTestGameObject->transform->Rotate(moveInput.x * rotationSpeed);
+	gTestGameObject1->transform->Rotate(moveInput.x * rotationSpeed);
 }
 
 bool Init()
@@ -99,7 +98,7 @@ bool Init()
 		}
 	}
 
-	gInputManager = InputManager::GetInstance();
+	ObjectManager::GetInstance()->SetRenderer(gRenderer);
 	return success;
 }
 
@@ -108,9 +107,9 @@ bool LoadMedia()
 	//Loading success flag
 	bool success = true;
 
-	gTestGameObject = new GameObject(gRenderer, "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), nullptr);
-	gTestGameObject2 = new GameObject(gRenderer, "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 + 40, SCREEN_HEIGHT / 2 + 40), gTestGameObject->transform);
-	gTestGameObject3 = new GameObject(gRenderer, "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 -30 , SCREEN_HEIGHT / 2 + 30), gTestGameObject->transform);
+	gTestGameObject1 = ObjectManager::GetInstance()->CreateGameObject("GO1", "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), 0.0f, nullptr);
+	gTestGameObject2 = ObjectManager::GetInstance()->CreateGameObject("GO2", "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 + 40, SCREEN_HEIGHT / 2 + 40), 0.0f, gTestGameObject1->transform);
+	gTestGameObject3 = ObjectManager::GetInstance()->CreateGameObject("GO3", "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 - 30, SCREEN_HEIGHT / 2 + 30), 0.0f, gTestGameObject1->transform);
 
 	return success;
 }
@@ -135,24 +134,23 @@ void ProgramUpdate()
 				quit = true;
 			}
 
-			gInputManager->UpdateInputManager(e);
+			InputManager::GetInstance()->UpdateInputManager(e);
 		}
 
-		MoveDot2(gInputManager->GetMoveInput());
+		MoveDot2(InputManager::GetInstance()->GetMoveInput());
 
 		//Clear screen
 		SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 		SDL_RenderClear(gRenderer);
 
 		//Update screen
-		Transform* testTransform = gTestGameObject->transform;
+		Transform* testTransform = gTestGameObject1->transform;
 		Transform* testTransform2 = gTestGameObject2->transform;
 		Transform* testTransform3 = gTestGameObject3->transform;
 
-		gTestGameObject->textureRenderer->Render(testTransform->GetPosition(), testTransform->GetRotation(), testTransform->GetScale());
+		gTestGameObject1->textureRenderer->Render(testTransform->GetPosition(), testTransform->GetRotation(), testTransform->GetScale());
 		gTestGameObject2->textureRenderer->Render(testTransform2->GetPosition(), testTransform2->GetRotation(), testTransform2->GetScale());
 		gTestGameObject3->textureRenderer->Render(testTransform3->GetPosition(), testTransform3->GetRotation(), testTransform3->GetScale());
-
 
 		SDL_RenderPresent(gRenderer);
 	}
@@ -166,9 +164,11 @@ void Close()
 	gWindow = nullptr;
 	gRenderer = nullptr;
 
-	//Destroy GameObjects
-	delete gTestGameObject;
+	//Handling singletons
+	InputManager::ResetInstance();
+	ObjectManager::ResetInstance();
 
+	
 	//Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();

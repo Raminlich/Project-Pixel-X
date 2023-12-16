@@ -5,7 +5,7 @@ class GameObject;
 class Component
 {
 public:
-	GameObject* mGameObject = nullptr;
+	GameObject* gameObject = nullptr;
 
 	Component(GameObject* gameObject);
 	virtual ~Component();

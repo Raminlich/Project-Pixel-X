@@ -1,5 +1,11 @@
 #pragma once
-#include "Transform.h"
+#include "SDL2/SDL.h"
+#include "Vector.h"
+
+#include <vector>
+
+class GameObject;
+class Transform;
 
 class ObjectManager 
 {
@@ -8,10 +14,19 @@ private:
 	~ObjectManager();
 
 	static ObjectManager* objectManager_;
+
+	std::vector<GameObject*> mGameObjects;
+
+	SDL_Renderer* mSDLRenderer;
 public:
 	ObjectManager(ObjectManager& other) = delete;
 	void operator = (const ObjectManager& other) = delete;
 
 	static ObjectManager* GetInstance();
 	static void ResetInstance();
+
+	void SetRenderer(SDL_Renderer* sdlRenderer);
+	GameObject* CreateGameObject(const char* name, const char* texturePath, Vector2 initialPosition, float initialRotation, Transform* parentTransform); // Creates and returns new game object
+	void DestroyAll(); //Destroys all gameobjects
+	void Destroy(GameObject* gameObject); //Destroys given gameobject
 };

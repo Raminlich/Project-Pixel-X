@@ -1,21 +1,29 @@
 #include "Transform.h"
 #include "GameObject.h"
 
+#include <cmath>
 #include <algorithm>
 
 
-Transform::Transform(GameObject* gameObject, const Vector2& initialPosition, Transform* parentTransform)
-	:Component(gameObject), mGlobalPosition(initialPosition), mGlobalRotation(0), mParent(parentTransform)
+Transform::Transform(GameObject* gameObject, const Vector2& initialPosition, float initialRotation,Transform* parentTransform)
+	:Component(gameObject), mGlobalPosition(initialPosition), mGlobalRotation(initialRotation), mParent(parentTransform)
 {
 	if (mParent != nullptr)
 	{
 		mParent->mChildrenTransform.emplace_back(this);
 	}
+
+	HandleDirection();
 }
 
 Transform::~Transform()
 {
 
+}
+
+const Transform* const Transform::GetParent()
+{
+	return mParent;
 }
 
 Vector2 Transform::GetPosition()
