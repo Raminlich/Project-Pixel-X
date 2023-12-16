@@ -18,3 +18,9 @@ GameObject::~GameObject()
 	transform = nullptr;
 	textureRenderer = nullptr;
 }
+
+void GameObject::Update() 
+{
+	transform->Update();
+	textureRenderer->Update();
+}

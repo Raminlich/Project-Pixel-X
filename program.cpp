@@ -144,14 +144,7 @@ void ProgramUpdate()
 		SDL_RenderClear(gRenderer);
 
 		//Update screen
-		Transform* testTransform = gTestGameObject1->transform;
-		Transform* testTransform2 = gTestGameObject2->transform;
-		Transform* testTransform3 = gTestGameObject3->transform;
-
-		gTestGameObject1->textureRenderer->Render(testTransform->GetPosition(), testTransform->GetRotation(), testTransform->GetScale());
-		gTestGameObject2->textureRenderer->Render(testTransform2->GetPosition(), testTransform2->GetRotation(), testTransform2->GetScale());
-		gTestGameObject3->textureRenderer->Render(testTransform3->GetPosition(), testTransform3->GetRotation(), testTransform3->GetScale());
-
+		ObjectManager::GetInstance()->Update();
 		SDL_RenderPresent(gRenderer);
 	}
 }

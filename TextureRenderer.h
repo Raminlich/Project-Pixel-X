@@ -26,6 +26,8 @@ public:
 	//Deallocates memory
 	~TextureRenderer();
 
+	void Update() override;
+
 	//Initialize component
 	void Init(std::string path);
 

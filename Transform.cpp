@@ -21,6 +21,11 @@ Transform::~Transform()
 
 }
 
+void Transform::Update()
+{
+
+}
+
 const Transform* const Transform::GetParent()
 {
 	return mParent;

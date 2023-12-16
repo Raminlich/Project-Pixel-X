@@ -25,6 +25,8 @@ public:
 	static ObjectManager* GetInstance();
 	static void ResetInstance();
 
+	void Update();
+
 	void SetRenderer(SDL_Renderer* sdlRenderer);
 	GameObject* CreateGameObject(const char* name, const char* texturePath, Vector2 initialPosition, float initialRotation, Transform* parentTransform); // Creates and returns new game object
 	void DestroyAll(); //Destroys all gameobjects

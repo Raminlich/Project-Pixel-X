@@ -37,6 +37,14 @@ void ObjectManager::ResetInstance()
 	objectManager_ = nullptr;
 }
 
+void ObjectManager::Update()
+{
+	for (GameObject* gameObject : mGameObjects) 
+	{
+		gameObject->Update();
+	}
+}
+
 void ObjectManager::SetRenderer(SDL_Renderer* sdlRenderer)
 {
 	mSDLRenderer = sdlRenderer;

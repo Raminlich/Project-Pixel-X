@@ -15,6 +15,12 @@ TextureRenderer::~TextureRenderer()
 	Free();
 }
 
+void TextureRenderer::Update()
+{
+	Transform* transform = gameObject->transform;
+    Render(transform->GetPosition(), transform->GetRotation(), transform->GetScale());
+}
+
 void TextureRenderer::Init(std::string path)
 {
 	//Init

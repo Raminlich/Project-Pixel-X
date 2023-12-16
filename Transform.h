@@ -22,7 +22,10 @@ private :
 public:
 
 	Transform(GameObject* gameObject,const Vector2& initialPosition, float initialRotation, Transform* parentTransform = nullptr);
+	
 	~Transform();
+
+	void Update() override;
 
 	//Get parent of object
 	const Transform* const GetParent();

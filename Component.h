@@ -9,4 +9,6 @@ public:
 
 	Component(GameObject* gameObject);
 	virtual ~Component();
+
+	virtual void Update() = 0;
 };
