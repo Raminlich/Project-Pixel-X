@@ -1,6 +1,9 @@
 #include "Transform.h"
 #include "GameObject.h"
 
+#include <algorithm>
+
+
 Transform::Transform(GameObject* gameObject, const Vector2& initialPosition, Transform* parentTransform)
 	:Component(gameObject), mGlobalPosition(initialPosition), mGlobalRotation(0), mParent(parentTransform)
 {
@@ -160,12 +163,11 @@ void Transform::SetParent(Transform* newParentTransform)
 {
 	if (mParent != nullptr)
 	{
-		std::vector<Transform*>::iterator iterator;
-		iterator = remove(newParentTransform->mChildrenTransform.begin(), newParentTransform->mChildrenTransform.end(), this);
+		mParent->mChildrenTransform.erase(std::remove(mParent->mChildrenTransform.begin(), mParent->mChildrenTransform.end(), this), mParent->mChildrenTransform.end());
 	}
 
 	mParent = newParentTransform;
-	if (newParentTransform != nullptr)
+	if (mParent != nullptr)
 	{
 		mParent->mChildrenTransform.emplace_back(this);
 	}

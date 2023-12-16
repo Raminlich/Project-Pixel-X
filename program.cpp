@@ -109,8 +109,8 @@ bool LoadMedia()
 	bool success = true;
 
 	gTestGameObject = new GameObject(gRenderer, "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), nullptr);
-	gTestGameObject2 = new GameObject(gRenderer, "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 + 30, SCREEN_HEIGHT / 2 + 30), gTestGameObject->transform);
-	gTestGameObject3 = new GameObject(gRenderer, "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 -30 , SCREEN_HEIGHT / 2 + 30), gTestGameObject2->transform);
+	gTestGameObject2 = new GameObject(gRenderer, "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 + 40, SCREEN_HEIGHT / 2 + 40), gTestGameObject);
+	gTestGameObject3 = new GameObject(gRenderer, "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 -30 , SCREEN_HEIGHT / 2 + 30), gTestGameObject);
 
 	return success;
 }
