@@ -42,15 +42,15 @@ std::vector<SDL_Rect*> SpriteAnimator::SetFrames(int frames, int xTile, int yTil
 	return framesRect;
 }
 
-void SpriteAnimator::Render(int x, int y)
+void SpriteAnimator::Render(int x, int y , Vector2 scale)
 {
 	SDL_Rect quad = { x,y,width,height };
 
 
 	if (currentClip != NULL)
 	{
-		quad.w = currentClip->w * 2;
-		quad.h = currentClip->h * 2;
+		quad.w = currentClip->w * scale.x;
+		quad.h = currentClip->h * scale.y;
 	}
 
 	if (frameTime > 7)

@@ -159,7 +159,7 @@ void ProgramUpdate()
 		SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 0);
 		SDL_RenderClear(gRenderer);
 
-		animator->Render(0, 0);
+		animator->Render(0, 0,Vector2(1.5f,1.5f));
 		ObjectManager::GetInstance()->Update();
 
 		SDL_RenderPresent(gRenderer);

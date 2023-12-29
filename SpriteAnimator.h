@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <vector>
 #include "Component.h"
+#include "Vector.h"
 
 class SpriteAnimator : public Component
 {
@@ -10,7 +11,7 @@ public:
 	~SpriteAnimator();
 	void Update() override;
 	std::vector<SDL_Rect*> SetFrames(int frames, int xTile, int yTile, int tileWidth, int tileHeight);
-	void Render(int x, int y);
+	void Render(int x, int y,Vector2 scale);
 private:
 	SDL_Texture* texture;
 	std::vector<SDL_Rect*> framesRect;
