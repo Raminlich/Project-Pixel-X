@@ -3,13 +3,14 @@
 #include "fmt/format.h"
 #include "InputManager.h"
 #include "ObjectManager.h"
+#include "ResourceManager.h"
 #include "GameObject.h"
 #include "Transform.h"
 #include "Vector.h"
+#include "SpriteAnimator.h"
 
 #include <iostream>
-#include "SpriteAnimator.h"
-#include "ResourceManager.h"
+
 
 const float SCREEN_WIDTH = 640;
 const float SCREEN_HEIGHT = 480;
@@ -117,7 +118,7 @@ void Close()
 	//Handling singletons
 	InputManager::ResetInstance();
 	ObjectManager::ResetInstance();
-
+	ResourceManager::ResetInstance();
 
 	//Quit SDL subsystems
 	IMG_Quit();
