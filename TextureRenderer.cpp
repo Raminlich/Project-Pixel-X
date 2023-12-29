@@ -2,8 +2,8 @@
 #include "Transform.h"
 #include "GameObject.h"
 
-TextureRenderer::TextureRenderer(GameObject* gameObject,SDL_Renderer* sdlRenderer, std::string texturePath)
-	: Component(gameObject) ,mRenderer(sdlRenderer)
+TextureRenderer::TextureRenderer(GameObject* gameObject, SDL_Renderer* sdlRenderer, std::string texturePath)
+	: Component(gameObject), mRenderer(sdlRenderer)
 {
 	//Initialize
 	Init(texturePath);
@@ -18,7 +18,8 @@ TextureRenderer::~TextureRenderer()
 void TextureRenderer::Update()
 {
 	Transform* transform = gameObject->transform;
-    Render(transform->GetPosition(), transform->GetRotation(), transform->GetScale());
+	if (!disableUpdateRender)
+		Render(transform->GetPosition(), transform->GetRotation(), transform->GetScale());
 }
 
 void TextureRenderer::Init(std::string path)
@@ -68,6 +69,11 @@ bool TextureRenderer::LoadFromFile(std::string path)
 	//Return success
 	mTexture = newTexture;
 	return mTexture != NULL;
+}
+
+SDL_Texture* TextureRenderer::GetTexture()
+{
+	return mTexture;
 }
 
 void TextureRenderer::Free()

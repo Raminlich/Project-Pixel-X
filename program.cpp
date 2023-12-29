@@ -8,6 +8,8 @@
 #include "Vector.h"
 
 #include <iostream>
+#include "SpriteAnimator.h"
+#include "ResourceManager.h"
 
 const float SCREEN_WIDTH = 640;
 const float SCREEN_HEIGHT = 480;
@@ -17,24 +19,13 @@ SDL_Renderer* gRenderer;
 GameObject* gTestGameObject1;
 GameObject* gTestGameObject2;
 GameObject* gTestGameObject3;
+GameObject* gAnimatedObject;
+SDL_Texture* animatedSprite;
+ResourceManager* rscm;
+SpriteAnimator* animator;
 
 
-void MoveDot(Vector2 moveInput)
-{
-	float moveSpeed = 2.0f;
-	moveInput.Normalize();
-
-	Vector2 moveVector = moveInput * moveSpeed;
-	moveVector = Vector2::WorldToSDL(moveVector);
-	gTestGameObject1->transform->Translate(moveVector);
-
-	if (Vector2::Magnitude(moveInput) == 0) return;
-	Vector2 lookDirection = Vector2::Lerp(gTestGameObject1->transform->GetUp(), moveInput, 0.1f);
-
-	gTestGameObject1->transform->LookAt(lookDirection);
-}
-
-void MoveDot2(Vector2 moveInput) 
+void MoveDot2(Vector2 moveInput)
 {
 	if (moveInput.y == 0) return;
 	float moveSpeed = 2.0f;
@@ -111,17 +102,43 @@ bool LoadMedia()
 	gTestGameObject2 = ObjectManager::GetInstance()->CreateGameObject("GO2", "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 + 40, SCREEN_HEIGHT / 2 + 40), 0.0f, gTestGameObject1->transform);
 	gTestGameObject3 = ObjectManager::GetInstance()->CreateGameObject("GO3", "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 - 30, SCREEN_HEIGHT / 2 + 30), 0.0f, gTestGameObject1->transform);
 
+
 	return success;
+}
+
+
+void Close()
+{
+	//Destroy window	
+	SDL_DestroyRenderer(gRenderer);
+	SDL_DestroyWindow(gWindow);
+	gWindow = nullptr;
+	gRenderer = nullptr;
+
+	//Handling singletons
+	InputManager::ResetInstance();
+	ObjectManager::ResetInstance();
+
+
+	//Quit SDL subsystems
+	IMG_Quit();
+	SDL_Quit();
+}
+
+void InitAnimation()
+{
+	animatedSprite = rscm->LoadTexture("Assets/Pyromancer_Idle.png", gRenderer);
+	animator = new SpriteAnimator(gAnimatedObject, animatedSprite, gRenderer);
+	animator->SetFrames(8, 150, 0, 150, 150);
 }
 
 void ProgramUpdate()
 {
-	//Main loop flag
+	InitAnimation();
 	bool quit = false;
 
 	//Event handler
 	SDL_Event e;
-
 	//While application is running
 	while (!quit)
 	{
@@ -139,32 +156,15 @@ void ProgramUpdate()
 
 		MoveDot2(InputManager::GetInstance()->GetMoveInput());
 
-		//Clear screen
-		SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+		SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 0);
 		SDL_RenderClear(gRenderer);
 
-		//Update screen
+		animator->Render(0, 0);
 		ObjectManager::GetInstance()->Update();
+
 		SDL_RenderPresent(gRenderer);
+
 	}
-}
-
-void Close()
-{
-	//Destroy window	
-	SDL_DestroyRenderer(gRenderer);
-	SDL_DestroyWindow(gWindow);
-	gWindow = nullptr;
-	gRenderer = nullptr;
-
-	//Handling singletons
-	InputManager::ResetInstance();
-	ObjectManager::ResetInstance();
-
-	
-	//Quit SDL subsystems
-	IMG_Quit();
-	SDL_Quit();
 }
 
 int main(int argc, char* args[])

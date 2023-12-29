@@ -47,6 +47,12 @@
     <ClCompile Include="Component.cpp">
       <Filter>Lib\Sources</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteAnimator.cpp">
+      <Filter>Lib\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Lib\Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -68,6 +74,12 @@
       <Filter>Lib\Headers</Filter>
     </ClInclude>
     <ClInclude Include="ObjectManager.h">
+      <Filter>Lib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteAnimator.h">
+      <Filter>Lib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
       <Filter>Lib\Headers</Filter>
     </ClInclude>
   </ItemGroup>

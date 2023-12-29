@@ -18,6 +18,7 @@ public:
 	//Image dimensions
 	float width;
 	float height;
+	bool disableUpdateRender;
 	SDL_RendererFlip flip;
 
 	//Initializes variables
@@ -33,6 +34,8 @@ public:
 
 	//Loads image at specified path
 	bool LoadFromFile(std::string path);
+
+	SDL_Texture* GetTexture();
 
 	//Deallocates texture
 	void Free();

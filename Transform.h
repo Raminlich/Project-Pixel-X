@@ -6,9 +6,9 @@
 #include <iostream>
 #include <vector>
 
-class Transform : public Component 
+class Transform : public Component
 {
-private :
+private:
 	Vector2 mGlobalPosition; //World position of object
 	float mGlobalRotation = 0.0f; //World Rotation of object
 	Vector2 mGlobalScale = Vector2(1, 1); //World scale of object
@@ -21,8 +21,8 @@ private :
 
 public:
 
-	Transform(GameObject* gameObject,const Vector2& initialPosition, float initialRotation, Transform* parentTransform = nullptr);
-	
+	Transform(GameObject* gameObject, const Vector2& initialPosition, float initialRotation, Transform* parentTransform = nullptr);
+
 	~Transform();
 
 	void Update() override;
