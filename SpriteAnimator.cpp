@@ -53,11 +53,11 @@ void SpriteAnimator::Render(int x, int y , Vector2 scale)
 		quad.h = currentClip->h * scale.y;
 	}
 
-	if (frameTime > 7)
+	if (frameTime >= frameContainer.size())
 	{
 		currentClip = frameContainer[currentFrame];
 		currentFrame++;
-		if (currentFrame > 7)
+		if (currentFrame >= frameContainer.size())
 		{
 			currentFrame = 0;
 		}
