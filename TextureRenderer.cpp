@@ -1,6 +1,7 @@
 #include "TextureRenderer.h"
-#include "Transform.h"
+#include "ResourceManager.h"
 #include "GameObject.h"
+#include "Transform.h"
 
 TextureRenderer::TextureRenderer(GameObject* gameObject, SDL_Renderer* sdlRenderer, std::string texturePath)
 	: Component(gameObject), mRenderer(sdlRenderer)
@@ -18,7 +19,6 @@ TextureRenderer::~TextureRenderer()
 void TextureRenderer::Update()
 {
 	Transform* transform = gameObject->transform;
-	if (!disableUpdateRender)
 		Render(transform->GetPosition(), transform->GetRotation(), transform->GetScale());
 }
 
@@ -30,45 +30,16 @@ void TextureRenderer::Init(std::string path)
 	flip = SDL_FLIP_NONE;
 }
 
-bool TextureRenderer::LoadFromFile(std::string path)
+void TextureRenderer::LoadFromFile(std::string path)
 {
 	//Get rid of preexisting texture
 	Free();
 
 	//The final texture
-	SDL_Texture* newTexture = NULL;
-
-	//Load image at specified path
-	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
-	if (loadedSurface == NULL)
-	{
-		printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
-	}
-	else
-	{
-		//Color key image
-		//SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
-
-		//Create texture from surface pixels
-		newTexture = SDL_CreateTextureFromSurface(mRenderer, loadedSurface);
-		if (newTexture == NULL)
-		{
-			printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
-		}
-		else
-		{
-			//Get image dimensions
-			width = loadedSurface->w;
-			height = loadedSurface->h;
-		}
-
-		//Get rid of old loaded surface
-		SDL_FreeSurface(loadedSurface);
-	}
-
-	//Return success
-	mTexture = newTexture;
-	return mTexture != NULL;
+	LoadedTexture loadedTexture = ResourceManager::GetInstance()->LoadTexture(path,mRenderer);
+	width = loadedTexture.width;
+	height = loadedTexture.height;
+	mTexture = loadedTexture.texture;
 }
 
 SDL_Texture* TextureRenderer::GetTexture()

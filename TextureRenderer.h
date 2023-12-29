@@ -33,7 +33,7 @@ public:
 	void Init(std::string path);
 
 	//Loads image at specified path
-	bool LoadFromFile(std::string path);
+	void LoadFromFile(std::string path);
 
 	SDL_Texture* GetTexture();
 

@@ -21,7 +21,6 @@ GameObject* gTestGameObject2;
 GameObject* gTestGameObject3;
 GameObject* gAnimatedObject;
 SDL_Texture* animatedSprite;
-ResourceManager* rscm;
 SpriteAnimator* animator;
 
 
@@ -127,7 +126,7 @@ void Close()
 
 void InitAnimation()
 {
-	animatedSprite = rscm->LoadTexture("Assets/Pyromancer_Idle.png", gRenderer);
+	animatedSprite = ResourceManager::GetInstance()->LoadTexture("Assets/Pyromancer_Idle.png", gRenderer).texture;
 	animator = new SpriteAnimator(gAnimatedObject, animatedSprite, gRenderer);
 	animator->SetFrames(8, 150, 0, 150, 150);
 }
