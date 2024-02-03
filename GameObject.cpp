@@ -1,26 +1,33 @@
 #include "GameObject.h"
 #include "Transform.h"
 
-GameObject::GameObject(const char* name, SDL_Renderer* sdlRenderer, const char* texturePath, Vector2 initialPosition, float initialRotation, Transform* parentTransform)
+GameObject::GameObject(const char* name, SDL_Renderer* sdlRenderer, Vector2 initialPosition, float initialRotation, Transform* parentTransform)
 	:name(name)
 {
 	transform = new Transform(this, initialPosition, initialRotation ,parentTransform);
-	textureRenderer = new TextureRenderer(this , sdlRenderer, texturePath);
+	//textureRenderer = new TextureRenderer(this , sdlRenderer, texturePath);
 }
 
 GameObject::~GameObject()
 {
 	std::cout << name << " Destroyed" << std::endl;
 
-	delete transform;
-	delete textureRenderer;
+	//delete transform;
+	//delete textureRenderer;
 
-	transform = nullptr;
-	textureRenderer = nullptr;
+	//transform = nullptr;
+	//textureRenderer = nullptr;
 }
 
-void GameObject::Update() 
+void GameObject::AddComponent(Component* component)
 {
-	transform->Update();
-	textureRenderer->Update();
+	components.emplace_back(component);
+}
+
+void GameObject::Update()
+{
+	for (Component* c : components)
+	{
+		c->Update();
+	}
 }

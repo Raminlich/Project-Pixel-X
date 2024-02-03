@@ -8,7 +8,7 @@
 #include "Transform.h"
 #include "Vector.h"
 #include "SpriteAnimator.h"
-
+#include "map"
 #include <iostream>
 
 
@@ -95,17 +95,15 @@ bool Init()
 
 bool LoadMedia()
 {
-	//Loading success flag
 	bool success = true;
 
 	gTestGameObject1 = ObjectManager::GetInstance()->CreateGameObject("GO1", "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), 0.0f, nullptr);
 	gTestGameObject2 = ObjectManager::GetInstance()->CreateGameObject("GO2", "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 + 40, SCREEN_HEIGHT / 2 + 40), 0.0f, gTestGameObject1->transform);
 	gTestGameObject3 = ObjectManager::GetInstance()->CreateGameObject("GO3", "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 - 30, SCREEN_HEIGHT / 2 + 30), 0.0f, gTestGameObject1->transform);
-
+	gAnimatedObject = ObjectManager::GetInstance()->CreateGameObject("GA01", "Assets/Pyromancer_Idle.png", Vector2(0, 0), 0, nullptr);
 
 	return success;
 }
-
 
 void Close()
 {
@@ -134,7 +132,7 @@ void InitAnimation()
 
 void ProgramUpdate()
 {
-	InitAnimation();
+	//InitAnimation();
 	bool quit = false;
 
 	//Event handler
@@ -159,7 +157,7 @@ void ProgramUpdate()
 		SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 0);
 		SDL_RenderClear(gRenderer);
 
-		animator->Render(0, 0,Vector2(1.5f,1.5f));
+		//animator->Render(0, 0,Vector2(1.5f,1.5f));
 		ObjectManager::GetInstance()->Update();
 
 		SDL_RenderPresent(gRenderer);

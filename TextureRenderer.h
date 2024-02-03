@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-class TextureRenderer : public Component
+class TextureRenderer : public Component 
 {
 private:
 	//SDL_Renderer for window we want to render
