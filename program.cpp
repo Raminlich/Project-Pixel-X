@@ -105,6 +105,9 @@ bool LoadMedia()
 	gTestGameObject1 = ObjectManager::GetInstance()->CreateGameObject("G01", Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), 0.0f);
 	textureRenderer = new TextureRenderer(gTestGameObject1, gRenderer, "Assets/bmp/dot.bmp");
 	gTestGameObject1->AddComponent(textureRenderer);
+
+	//TODO:
+	//SpriteAnimator
 	
 	return success;
 }
@@ -156,7 +159,7 @@ void ProgramUpdate()
 			InputManager::GetInstance()->UpdateInputManager(e);
 		}
 
-		//MoveDot2(InputManager::GetInstance()->GetMoveInput());
+		MoveDot2(InputManager::GetInstance()->GetMoveInput());
 
 		SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 0);
 		SDL_RenderClear(gRenderer);
