@@ -13,6 +13,7 @@ private:
 	SDL_Renderer* mRenderer;
 	//The actual hardware texture
 	SDL_Texture* mTexture;
+	GameObject* gameObject;
 
 public:
 	//Image dimensions

@@ -29,6 +29,7 @@ public:
 
 	void SetRenderer(SDL_Renderer* sdlRenderer);
 	GameObject* CreateGameObject(const char* name, const char* texturePath, Vector2 initialPosition, float initialRotation, Transform* parentTransform); // Creates and returns new game object
+	void AddGameObject(GameObject* gameObject);
 	void DestroyAll(); //Destroys all gameobjects
 	void Destroy(GameObject* gameObject); //Destroys given gameobject
 };

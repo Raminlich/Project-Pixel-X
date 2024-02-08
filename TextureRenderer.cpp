@@ -4,8 +4,9 @@
 #include "Transform.h"
 
 TextureRenderer::TextureRenderer(GameObject* gameObject, SDL_Renderer* sdlRenderer, std::string texturePath)
-	: Component(gameObject), mRenderer(sdlRenderer)
+	: mRenderer(sdlRenderer)
 {
+	this->gameObject = gameObject;
 	//Initialize
 	Init(texturePath);
 }

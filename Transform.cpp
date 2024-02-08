@@ -6,7 +6,7 @@
 
 
 Transform::Transform(GameObject* gameObject, const Vector2& initialPosition, float initialRotation,Transform* parentTransform)
-	:Component(gameObject), mGlobalPosition(initialPosition), mGlobalRotation(initialRotation), mParent(parentTransform)
+	: mGlobalPosition(initialPosition), mGlobalRotation(initialRotation), mParent(parentTransform)
 {
 	if (mParent != nullptr)
 	{

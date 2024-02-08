@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include "Transform.h"
 
-GameObject::GameObject(const char* name, SDL_Renderer* sdlRenderer, Vector2 initialPosition, float initialRotation, Transform* parentTransform)
+GameObject::GameObject(const char* name, Vector2 initialPosition, float initialRotation, Transform* parentTransform)
 	:name(name)
 {
 	transform = new Transform(this, initialPosition, initialRotation ,parentTransform);

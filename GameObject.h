@@ -12,18 +12,14 @@ public:
 	const char* name;
 
 	Transform* transform;
-	//TextureRenderer* textureRenderer;
-
-	GameObject(const char* name, SDL_Renderer* sdlRenderer, Vector2 initialPosition, float initialRotation, Transform* parentTransform);
+	GameObject(const char* name, Vector2 initialPosition, float initialRotation, Transform* parentTransform);
 	virtual ~GameObject();
 	void AddComponent(Component* component);
 	template <typename T>
 	T* GetComponent() const;
+	void Update();
 private :
 	std::vector<Component*> components;
-
-	// Inherited via Component
-	void Update();
 };
 
 template<typename T>
