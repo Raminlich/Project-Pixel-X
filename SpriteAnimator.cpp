@@ -1,7 +1,7 @@
 #include "SpriteAnimator.h"
 
 SpriteAnimator::SpriteAnimator(GameObject* gameObject,SDL_Texture* loadedTexture,SDL_Renderer* renderer) :
-	Component(gameObject) , currentFrame(0) , frameTime(0)
+	 currentFrame(0) , frameTime(0)
 {
 	texture = loadedTexture;
 	width = 0;
