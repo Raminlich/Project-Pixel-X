@@ -50,7 +50,7 @@ void ObjectManager::SetRenderer(SDL_Renderer* sdlRenderer)
 	mSDLRenderer = sdlRenderer;
 }
 
-GameObject* ObjectManager::CreateGameObject(const char* name, const char* texturePath, Vector2 initialPosition, float initialRotation, Transform* parentTransform)
+GameObject* ObjectManager::CreateGameObject(const char* name, Vector2 initialPosition, float initialRotation, Transform* parentTransform)
 {
 	if (mSDLRenderer == nullptr) 
 	{
@@ -61,11 +61,6 @@ GameObject* ObjectManager::CreateGameObject(const char* name, const char* textur
 	GameObject* newGO = new GameObject(name, initialPosition, initialRotation, parentTransform);
 	mGameObjects.emplace_back(newGO);
 	return newGO;
-}
-
-void ObjectManager::AddGameObject(GameObject* gameObject)
-{
-	mGameObjects.emplace_back(gameObject);
 }
 
 void ObjectManager::DestroyAll()

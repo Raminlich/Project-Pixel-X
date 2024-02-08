@@ -102,11 +102,10 @@ bool LoadMedia()
 	//gTestGameObject2 = ObjectManager::GetInstance()->CreateGameObject("GO2", "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 + 40, SCREEN_HEIGHT / 2 + 40), 0.0f, gTestGameObject1->transform);
 	//gTestGameObject3 = ObjectManager::GetInstance()->CreateGameObject("GO3", "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 - 30, SCREEN_HEIGHT / 2 + 30), 0.0f, gTestGameObject1->transform);
 	//gAnimatedObject = ObjectManager::GetInstance()->CreateGameObject("GA01", "Assets/Pyromancer_Idle.png", Vector2(0, 0), 0, nullptr);
-
-	gTestGameObject1 = new GameObject("G01", Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), 0.0f, nullptr);
+	gTestGameObject1 = ObjectManager::GetInstance()->CreateGameObject("G01", Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), 0.0f);
 	textureRenderer = new TextureRenderer(gTestGameObject1, gRenderer, "Assets/bmp/dot.bmp");
 	gTestGameObject1->AddComponent(textureRenderer);
-	ObjectManager::GetInstance()->AddGameObject(gTestGameObject1);
+	
 	return success;
 }
 
