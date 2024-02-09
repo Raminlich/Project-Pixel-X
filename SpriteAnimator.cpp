@@ -1,12 +1,8 @@
 #include "SpriteAnimator.h"
 
-SpriteAnimator::SpriteAnimator(GameObject* gameObject,SDL_Texture* loadedTexture,SDL_Renderer* renderer) :
-	 currentFrame(0) , frameTime(0)
+SpriteAnimator::SpriteAnimator(GameObject* gameObject, SDL_Texture* loadedTexture , TextureRenderer* textureRenderer) :
+	currentFrame(0), frameTime(0) , renderer(textureRenderer) , texture(loadedTexture) , width(0) , height(0)
 {
-	texture = loadedTexture;
-	width = 0;
-	height = 0;
-	this->renderer = renderer;
 }
 
 SpriteAnimator::~SpriteAnimator()
@@ -22,7 +18,18 @@ SpriteAnimator::~SpriteAnimator()
 
 void SpriteAnimator::Update()
 {
-
+	if (frameTime >= frameContainer.size())
+	{
+		currentClip = frameContainer[currentFrame];
+		currentFrame++;
+		if (currentFrame >= frameContainer.size())
+		{
+			currentFrame = 0;
+		}
+		frameTime = 0;
+	}
+	frameTime++;
+	renderer->SetTexture(texture, currentClip);
 }
 
 std::vector<SDL_Rect*> SpriteAnimator::SetFrames(int frames, int xTile, int yTile, int tileWidth, int tileHeight)
@@ -42,28 +49,3 @@ std::vector<SDL_Rect*> SpriteAnimator::SetFrames(int frames, int xTile, int yTil
 	return framesRect;
 }
 
-void SpriteAnimator::Render(int x, int y , Vector2 scale)
-{
-	SDL_Rect quad = { x,y,width,height };
-
-
-	if (currentClip != NULL)
-	{
-		quad.w = currentClip->w * scale.x;
-		quad.h = currentClip->h * scale.y;
-	}
-
-	if (frameTime >= frameContainer.size())
-	{
-		currentClip = frameContainer[currentFrame];
-		currentFrame++;
-		if (currentFrame >= frameContainer.size())
-		{
-			currentFrame = 0;
-		}
-		frameTime = 0;
-	}
-	frameTime++;
-
-	SDL_RenderCopy(renderer, texture, currentClip, &quad);
-}

@@ -3,16 +3,17 @@
 #include <vector>
 #include "Component.h"
 #include "Vector.h"
+#include "TextureRenderer.h"
 
 class SpriteAnimator : public Component
 {
 public:
-	SpriteAnimator(GameObject* gameobject ,SDL_Texture* loadedTexture,SDL_Renderer* renderer);
+	SpriteAnimator(GameObject* gameobject, SDL_Texture* loadedTexture, TextureRenderer* textureRenderer);
 	~SpriteAnimator();
 	void Update() override;
 	std::vector<SDL_Rect*> SetFrames(int frames, int xTile, int yTile, int tileWidth, int tileHeight);
-	void Render(int x, int y,Vector2 scale);
 private:
+	TextureRenderer* renderer;
 	SDL_Texture* texture;
 	std::vector<SDL_Rect*> framesRect;
 	std::vector<SDL_Rect*> frameContainer;
@@ -21,5 +22,4 @@ private:
 	int currentFrame;
 	int frameTime;
 	SDL_Rect* currentClip;
-	SDL_Renderer* renderer;
 };

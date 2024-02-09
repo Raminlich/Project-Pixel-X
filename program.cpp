@@ -18,8 +18,6 @@ const float SCREEN_HEIGHT = 480;
 SDL_Window* gWindow;
 SDL_Renderer* gRenderer;
 GameObject* gTestGameObject1;
-GameObject* gTestGameObject2;
-GameObject* gTestGameObject3;
 GameObject* gAnimatedObject;
 SDL_Texture* animatedSprite;
 SpriteAnimator* animator;
@@ -98,17 +96,15 @@ bool LoadMedia()
 {
 	bool success = true;
 
-	//gTestGameObject1 = ObjectManager::GetInstance()->CreateGameObject("GO1", "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), 0.0f, nullptr);
-	//gTestGameObject2 = ObjectManager::GetInstance()->CreateGameObject("GO2", "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 + 40, SCREEN_HEIGHT / 2 + 40), 0.0f, gTestGameObject1->transform);
-	//gTestGameObject3 = ObjectManager::GetInstance()->CreateGameObject("GO3", "Assets/bmp/dot.bmp", Vector2(SCREEN_WIDTH / 2 - 30, SCREEN_HEIGHT / 2 + 30), 0.0f, gTestGameObject1->transform);
-	//gAnimatedObject = ObjectManager::GetInstance()->CreateGameObject("GA01", "Assets/Pyromancer_Idle.png", Vector2(0, 0), 0, nullptr);
 	gTestGameObject1 = ObjectManager::GetInstance()->CreateGameObject("G01", Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), 0.0f);
-	textureRenderer = new TextureRenderer(gTestGameObject1, gRenderer, "Assets/bmp/dot.bmp");
+	gTestGameObject1->transform->SetScale(Vector2(1.5f, 1.5f));
+	textureRenderer = new TextureRenderer(gTestGameObject1, gRenderer);
+	animatedSprite = ResourceManager::GetInstance()->LoadTexture("Assets/Pyromancer_Idle.png", gRenderer).texture;
+	animator = new SpriteAnimator(gTestGameObject1, animatedSprite, textureRenderer);
+	animator->SetFrames(8, 150, 0, 150, 150);
 	gTestGameObject1->AddComponent(textureRenderer);
+	gTestGameObject1->AddComponent(animator);
 
-	//TODO:
-	//SpriteAnimator
-	
 	return success;
 }
 
@@ -128,13 +124,6 @@ void Close()
 	//Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
-}
-
-void InitAnimation()
-{
-	animatedSprite = ResourceManager::GetInstance()->LoadTexture("Assets/Pyromancer_Idle.png", gRenderer).texture;
-	animator = new SpriteAnimator(gAnimatedObject, animatedSprite, gRenderer);
-	animator->SetFrames(8, 150, 0, 150, 150);
 }
 
 void ProgramUpdate()

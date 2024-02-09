@@ -14,6 +14,7 @@ private:
 	//The actual hardware texture
 	SDL_Texture* mTexture;
 	GameObject* gameObject;
+	SDL_Rect* clip = NULL;
 
 public:
 	//Image dimensions
@@ -23,7 +24,7 @@ public:
 	SDL_RendererFlip flip;
 
 	//Initializes variables
-	TextureRenderer(GameObject* gameObject ,SDL_Renderer* sdlRenderer, std::string texturePath);
+	TextureRenderer(GameObject* gameObject ,SDL_Renderer* sdlRenderer, std::string texturePath = "");
 
 	//Deallocates memory
 	~TextureRenderer();
@@ -50,6 +51,8 @@ public:
 	//Set alpha modulation
 	void SetAlpha(Uint8 alpha);
 
+	void SetTexture(SDL_Texture* texture, SDL_Rect* currentClip);
+
 	//Renders texture at given point
-	void Render(Vector2 position, float angle = 0.0f,const Vector2& scale = Vector2(1,1), SDL_Rect* clip = NULL, SDL_FPoint* center = NULL);
+	void Render(Vector2 position, float angle = 0.0f,const Vector2& scale = Vector2(1,1), SDL_FPoint* center = NULL);
 };

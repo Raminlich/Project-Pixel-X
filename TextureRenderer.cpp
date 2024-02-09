@@ -8,7 +8,8 @@ TextureRenderer::TextureRenderer(GameObject* gameObject, SDL_Renderer* sdlRender
 {
 	this->gameObject = gameObject;
 	//Initialize
-	Init(texturePath);
+	if (texturePath != "")
+		Init(texturePath);
 }
 
 TextureRenderer::~TextureRenderer()
@@ -20,7 +21,7 @@ TextureRenderer::~TextureRenderer()
 void TextureRenderer::Update()
 {
 	Transform* transform = gameObject->transform;
-		Render(transform->GetPosition(), transform->GetRotation(), transform->GetScale());
+	Render(transform->GetPosition(), transform->GetRotation(), transform->GetScale());
 }
 
 void TextureRenderer::Init(std::string path)
@@ -37,7 +38,7 @@ void TextureRenderer::LoadFromFile(std::string path)
 	Free();
 
 	//The final texture
-	LoadedTexture loadedTexture = ResourceManager::GetInstance()->LoadTexture(path,mRenderer);
+	LoadedTexture loadedTexture = ResourceManager::GetInstance()->LoadTexture(path, mRenderer);
 	width = loadedTexture.width;
 	height = loadedTexture.height;
 	mTexture = loadedTexture.texture;
@@ -78,7 +79,13 @@ void TextureRenderer::SetAlpha(Uint8 alpha)
 	SDL_SetTextureAlphaMod(mTexture, alpha);
 }
 
-void TextureRenderer::Render(Vector2 position, float angle, const Vector2& scale, SDL_Rect* clip, SDL_FPoint* center)
+void TextureRenderer::SetTexture(SDL_Texture* texture, SDL_Rect* currentClip)
+{
+	mTexture = texture;
+	clip = currentClip;
+}
+
+void TextureRenderer::Render(Vector2 position, float angle, const Vector2& scale, SDL_FPoint* center)
 {
 	//Set rendering space and render to screen
 	SDL_FRect renderQuad = { position.x, position.y, width, height };
