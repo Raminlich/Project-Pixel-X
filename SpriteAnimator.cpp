@@ -1,7 +1,8 @@
 #include "SpriteAnimator.h"
 
 SpriteAnimator::SpriteAnimator(GameObject* gameObject , TextureRenderer* textureRenderer) :
-	currentFrame(0), frameTime(0) , renderer(textureRenderer) , width(0) , height(0) , texture(textureRenderer->GetTexture())
+	currentFrame(0), frameTime(0) , renderer(textureRenderer) , width(0) , height(0) , texture(textureRenderer->GetTexture()),
+	currentClip(NULL)
 {
 }
 
