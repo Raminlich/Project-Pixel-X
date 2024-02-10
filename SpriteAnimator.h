@@ -8,7 +8,7 @@
 class SpriteAnimator : public Component
 {
 public:
-	SpriteAnimator(GameObject* gameobject, SDL_Texture* loadedTexture, TextureRenderer* textureRenderer);
+	SpriteAnimator(GameObject* gameobject,TextureRenderer* textureRenderer);
 	~SpriteAnimator();
 	void Update() override;
 	std::vector<SDL_Rect*> SetFrames(int frames, int xTile, int yTile, int tileWidth, int tileHeight);

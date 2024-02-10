@@ -98,9 +98,9 @@ bool LoadMedia()
 
 	gTestGameObject1 = ObjectManager::GetInstance()->CreateGameObject("G01", Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), 0.0f);
 	gTestGameObject1->transform->SetScale(Vector2(1.5f, 1.5f));
-	textureRenderer = new TextureRenderer(gTestGameObject1, gRenderer);
-	animatedSprite = ResourceManager::GetInstance()->LoadTexture("Assets/Pyromancer_Idle.png", gRenderer).texture;
-	animator = new SpriteAnimator(gTestGameObject1, animatedSprite, textureRenderer);
+
+	textureRenderer = new TextureRenderer(gTestGameObject1, gRenderer, "Assets/Pyromancer_Idle.png");
+	animator = new SpriteAnimator(gTestGameObject1, textureRenderer);
 	animator->SetFrames(8, 150, 0, 150, 150);
 	gTestGameObject1->AddComponent(textureRenderer);
 	gTestGameObject1->AddComponent(animator);
