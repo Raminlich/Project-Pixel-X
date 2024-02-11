@@ -21,6 +21,12 @@
     <Filter Include="Lib\Sources">
       <UniqueIdentifier>{4bee139c-9782-4f44-acb8-c8b8b2af0243}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lib\Headers\Components">
+      <UniqueIdentifier>{c06d6d28-7556-4da9-be76-92b63b41e050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lib\Sources\Components">
+      <UniqueIdentifier>{de28722b-d0b3-406a-991f-7aa6d6408418}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="program.cpp">
@@ -32,26 +38,26 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Lib\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="TextureRenderer.cpp">
-      <Filter>Lib\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Lib\Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Vector.cpp">
       <Filter>Lib\Sources</Filter>
     </ClCompile>
     <ClCompile Include="ObjectManager.cpp">
       <Filter>Lib\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteAnimator.cpp">
-      <Filter>Lib\Sources</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Lib\Sources</Filter>
     </ClCompile>
     <ClCompile Include="AnimationData.cpp">
-      <Filter>Lib\Sources</Filter>
+      <Filter>Lib\Sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteAnimator.cpp">
+      <Filter>Lib\Sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureRenderer.cpp">
+      <Filter>Lib\Sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Lib\Sources\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,22 +67,10 @@
     <ClInclude Include="InputManager.h">
       <Filter>Lib\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="TextureRenderer.h">
-      <Filter>Lib\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Vector.h">
       <Filter>Lib\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Lib\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Lib\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectManager.h">
-      <Filter>Lib\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteAnimator.h">
       <Filter>Lib\Headers</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
@@ -84,6 +78,18 @@
     </ClInclude>
     <ClInclude Include="AnimationData.h">
       <Filter>Lib\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Lib\Headers\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteAnimator.h">
+      <Filter>Lib\Headers\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureRenderer.h">
+      <Filter>Lib\Headers\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Lib\Headers\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

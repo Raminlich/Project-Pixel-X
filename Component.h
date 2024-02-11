@@ -5,6 +5,11 @@ class GameObject;
 class Component
 {
 public:
+	GameObject* gameObject;
+
+	Component(GameObject* gameObject)
+		: gameObject(gameObject){}
+
 	virtual void Update() = 0;
 };
 
