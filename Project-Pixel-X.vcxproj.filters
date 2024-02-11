@@ -27,69 +27,87 @@
     <Filter Include="Lib\Sources\Components">
       <UniqueIdentifier>{de28722b-d0b3-406a-991f-7aa6d6408418}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lib\Headers\Utils">
+      <UniqueIdentifier>{a095c97c-6dfd-47ef-b34d-92ca64b906e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lib\Sources\Utils">
+      <UniqueIdentifier>{3e1656fb-5e1c-4eff-a875-8a95eb11803e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lib\Sources\Components\Rendering">
+      <UniqueIdentifier>{90e6bfd3-9403-4fc0-8b38-408bace1d6a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lib\Sources\Managers">
+      <UniqueIdentifier>{88cf1708-8ab5-467d-b1f6-01e463ed722f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lib\Headers\Components\Rendering">
+      <UniqueIdentifier>{0c4bc62c-07b7-45c8-9182-b648708116b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lib\Headers\Managers">
+      <UniqueIdentifier>{689d40d0-393a-4770-99df-6a790179a83c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="program.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Lib\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Lib\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector.cpp">
-      <Filter>Lib\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectManager.cpp">
-      <Filter>Lib\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Lib\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationData.cpp">
-      <Filter>Lib\Sources\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteAnimator.cpp">
-      <Filter>Lib\Sources\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureRenderer.cpp">
-      <Filter>Lib\Sources\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Lib\Sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.cpp">
+      <Filter>Lib\Sources\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationData.cpp">
+      <Filter>Lib\Sources\Components\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteAnimator.cpp">
+      <Filter>Lib\Sources\Components\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureRenderer.cpp">
+      <Filter>Lib\Sources\Components\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Lib\Sources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Lib\Sources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Lib\Sources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Lib\Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
       <Filter>Lib\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Lib\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector.h">
-      <Filter>Lib\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectManager.h">
-      <Filter>Lib\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Lib\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationData.h">
-      <Filter>Lib\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Component.h">
-      <Filter>Lib\Headers\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteAnimator.h">
-      <Filter>Lib\Headers\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureRenderer.h">
       <Filter>Lib\Headers\Components</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Lib\Headers\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Lib\Headers\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteAnimator.h">
+      <Filter>Lib\Headers\Components\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureRenderer.h">
+      <Filter>Lib\Headers\Components\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationData.h">
+      <Filter>Lib\Headers\Components\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Lib\Headers\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Lib\Headers\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Lib\Headers\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
