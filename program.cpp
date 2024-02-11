@@ -130,7 +130,8 @@ void ProgramUpdate()
 {
 	//InitAnimation();
 	bool quit = false;
-
+	Uint32 startTime = 0;
+	int countedFrames = 0;
 	//Event handler
 	SDL_Event e;
 	//While application is running
@@ -148,6 +149,12 @@ void ProgramUpdate()
 			InputManager::GetInstance()->UpdateInputManager(e);
 		}
 
+		float avgFPS = countedFrames / (SDL_GetTicks64() / 1000.0f);
+		if (avgFPS > 2000000)
+		{
+			avgFPS = 0;
+		}
+		std::cout << avgFPS << std::endl;
 		MoveDot2(InputManager::GetInstance()->GetMoveInput());
 
 		SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 0);
@@ -157,7 +164,7 @@ void ProgramUpdate()
 		ObjectManager::GetInstance()->Update();
 
 		SDL_RenderPresent(gRenderer);
-
+		++countedFrames;
 	}
 }
 
