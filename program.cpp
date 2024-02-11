@@ -88,7 +88,6 @@ bool Init()
 		}
 	}
 
-	ObjectManager::GetInstance()->SetRenderer(gRenderer);
 	return success;
 }
 
