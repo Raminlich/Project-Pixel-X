@@ -4,5 +4,6 @@ class GameContext
 {
 public:
 	GameContext();
+	~GameContext();
 };
 

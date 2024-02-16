@@ -124,7 +124,7 @@ void ProgramUpdate()
 		{
 			avgFPS = 0;
 		}
-		std::cout << avgFPS << std::endl;
+		//std::cout << avgFPS << std::endl;
 		SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 0);
 		SDL_RenderClear(gRenderer);
 
