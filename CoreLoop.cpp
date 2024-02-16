@@ -19,6 +19,8 @@ const float SCREEN_HEIGHT = 480;
 SDL_Window* gWindow;
 SDL_Renderer* gRenderer;
 
+GameContext* context;
+
 bool Init()
 {
 	//Initialization flag
@@ -71,12 +73,14 @@ bool Init()
 	}
 
 	ObjectManager::GetInstance()->SetRenderer(gRenderer);
-	GameContext* context = new GameContext();
+	context = new GameContext();
 	return success;
 }
 
 void Close()
 {
+	delete context;
+
 	//Destroy window	
 	SDL_DestroyRenderer(gRenderer);
 	SDL_DestroyWindow(gWindow);
