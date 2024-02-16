@@ -25,5 +25,12 @@ private :
 template<typename T>
 inline T* GameObject::GetComponent() const
 {
+	for (Component* component : components) 
+	{
+		if (typeid(*component) == typeid(T)) 
+		{
+			return (T*)component;
+		}
+	}
 	return nullptr;
 }

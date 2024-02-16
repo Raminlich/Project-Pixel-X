@@ -37,6 +37,13 @@ bool Pyromancer::LoadMedia()
 	gTestGameObject1->AddComponent(textureRenderer);
 	gTestGameObject1->AddComponent(animator);
 
+	//for GetComponent test
+	auto test = gTestGameObject1->GetComponent<SpriteAnimator>();
+	if (test != nullptr) 
+	{
+		std::cout << "Success" << std::endl;
+	}
+
 	return success;
 }
 
