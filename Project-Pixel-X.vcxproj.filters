@@ -47,9 +47,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="program.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Lib\Sources\Components</Filter>
     </ClCompile>
@@ -75,6 +72,15 @@
       <Filter>Lib\Sources\Managers</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
+      <Filter>Lib\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContext.cpp">
+      <Filter>Game\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Pyromancer.cpp">
+      <Filter>Game\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreLoop.cpp">
       <Filter>Lib\Sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -108,6 +114,12 @@
     </ClInclude>
     <ClInclude Include="ObjectManager.h">
       <Filter>Lib\Headers\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContext.h">
+      <Filter>Game\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Pyromancer.h">
+      <Filter>Game\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
