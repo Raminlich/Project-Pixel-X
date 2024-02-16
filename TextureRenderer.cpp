@@ -3,10 +3,10 @@
 #include "GameObject.h"
 #include "Transform.h"
 
-TextureRenderer::TextureRenderer(GameObject* gameObject, SDL_Renderer* sdlRenderer, std::string texturePath)
-	: Component(gameObject), mRenderer(sdlRenderer)
+TextureRenderer::TextureRenderer(GameObject* gameObject, std::string texturePath) : Component(gameObject)
 {
 	this->gameObject = gameObject;
+	mRenderer = ObjectManager::GetInstance()->GetRenderer();
 	//Initialize
 	if (texturePath != "")
 		Init(texturePath);

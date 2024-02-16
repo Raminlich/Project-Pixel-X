@@ -45,8 +45,24 @@ void ObjectManager::Update()
 	}
 }
 
+void ObjectManager::SetRenderer(SDL_Renderer* sdlRenderer)
+{
+	mSDLRenderer = sdlRenderer;
+}
+
+SDL_Renderer* ObjectManager::GetRenderer()
+{
+	return mSDLRenderer;
+}
+
 GameObject* ObjectManager::CreateGameObject(const char* name, Vector2 initialPosition, float initialRotation, Transform* parentTransform)
 {
+	if (mSDLRenderer == nullptr) 
+	{
+		std::cout << "SDL Renderer is not set in object manager" << std::endl;
+		return nullptr;
+	}
+
 	GameObject* newGO = new GameObject(name, initialPosition, initialRotation, parentTransform);
 	mGameObjects.emplace_back(newGO);
 	return newGO;

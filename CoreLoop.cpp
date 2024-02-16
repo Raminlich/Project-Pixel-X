@@ -10,6 +10,7 @@
 #include "SpriteAnimator.h"
 #include "map"
 #include <iostream>
+#include "GameContext.h"
 
 
 const float SCREEN_WIDTH = 640;
@@ -17,25 +18,6 @@ const float SCREEN_HEIGHT = 480;
 
 SDL_Window* gWindow;
 SDL_Renderer* gRenderer;
-GameObject* gTestGameObject1;
-GameObject* gAnimatedObject;
-SDL_Texture* animatedSprite;
-SpriteAnimator* animator;
-TextureRenderer* textureRenderer;
-
-
-void MoveDot2(Vector2 moveInput)
-{
-	if (moveInput.y == 0) return;
-	float moveSpeed = 2.0f;
-	float rotationSpeed = 2.0f;
-
-	Vector2 moveVector = gTestGameObject1->transform->GetUp() * moveInput.y * moveSpeed;
-	moveVector = Vector2::WorldToSDL(moveVector);
-	gTestGameObject1->transform->Translate(moveVector);
-
-	gTestGameObject1->transform->Rotate(moveInput.x * rotationSpeed);
-}
 
 bool Init()
 {
@@ -88,22 +70,8 @@ bool Init()
 		}
 	}
 
-	return success;
-}
-
-bool LoadMedia()
-{
-	bool success = true;
-
-	gTestGameObject1 = ObjectManager::GetInstance()->CreateGameObject("G01", Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), 0.0f);
-	gTestGameObject1->transform->SetScale(Vector2(1.5f, 1.5f));
-
-	textureRenderer = new TextureRenderer(gTestGameObject1, gRenderer, "Assets/Pyromancer_Idle.png");
-	animator = new SpriteAnimator(gTestGameObject1, textureRenderer);
-	animator->SetFrames(8, 150, 0, 150, 150);
-	gTestGameObject1->AddComponent(textureRenderer);
-	gTestGameObject1->AddComponent(animator);
-
+	ObjectManager::GetInstance()->SetRenderer(gRenderer);
+	GameContext* context = new GameContext();
 	return success;
 }
 
@@ -127,7 +95,6 @@ void Close()
 
 void ProgramUpdate()
 {
-	//InitAnimation();
 	bool quit = false;
 	Uint32 startTime = 0;
 	int countedFrames = 0;
@@ -154,12 +121,9 @@ void ProgramUpdate()
 			avgFPS = 0;
 		}
 		std::cout << avgFPS << std::endl;
-		MoveDot2(InputManager::GetInstance()->GetMoveInput());
-
 		SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 0);
 		SDL_RenderClear(gRenderer);
 
-		//animator->Render(0, 0,Vector2(1.5f,1.5f));
 		ObjectManager::GetInstance()->Update();
 
 		SDL_RenderPresent(gRenderer);
@@ -176,15 +140,7 @@ int main(int argc, char* args[])
 	}
 	else
 	{
-		//Load media
-		if (!LoadMedia())
-		{
-			printf("Failed to load media!\n");
-		}
-		else
-		{
-			ProgramUpdate();
-		}
+		ProgramUpdate();
 	}
 
 	//Free resources and close SDL

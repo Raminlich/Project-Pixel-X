@@ -24,7 +24,8 @@ public:
 	SDL_RendererFlip flip;
 
 	//Initializes variables
-	TextureRenderer(GameObject* gameObject ,SDL_Renderer* sdlRenderer, std::string texturePath = "");
+	TextureRenderer();
+	TextureRenderer(GameObject* gameObject , std::string texturePath = "");
 
 	//Deallocates memory
 	~TextureRenderer();
