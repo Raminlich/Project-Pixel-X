@@ -30,6 +30,8 @@ public:
 
 	void Add(ActionType action);
 
+	void RemoveAllActions();
+
 	void Invoke();
 
 private:
@@ -74,6 +76,11 @@ inline void EventAction<void>::operator+=(ActionType action)
 inline void EventAction<void>::Add(ActionType action)
 {
 	actions.push_back(action);
+}
+
+inline void EventAction<void>::RemoveAllActions()
+{
+	actions.clear();
 }
 
 inline void EventAction<void>::Invoke()
