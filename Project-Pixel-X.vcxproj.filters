@@ -83,9 +83,6 @@
     <ClCompile Include="CoreLoop.cpp">
       <Filter>Lib\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="EventAction.cpp">
-      <Filter>Lib\Sources\Utils</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">

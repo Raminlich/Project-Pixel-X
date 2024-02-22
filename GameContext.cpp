@@ -5,6 +5,7 @@
 
 Pyromancer* pyromancer;
 EventAction<void> testAction;
+EventAction<int, int> testActionInt;
 
 GameContext::GameContext()
 {
@@ -12,9 +13,14 @@ GameContext::GameContext()
 	pyromancer = new Pyromancer();
 	testAction += []()
 		{
-			std::cout << "test";
+			std::cout << "test"<<std::endl;
 		};
+	testActionInt += ([](int x, int y)
+		{
+			std::cout << "test int " <<x << " " << y;
+		});
 	testAction.Invoke();
+	testActionInt.Invoke(5, 6);
 
 }
 
