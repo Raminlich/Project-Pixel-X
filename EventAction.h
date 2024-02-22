@@ -1,5 +1,6 @@
 #pragma once
 #include <functional>
+#include <algorithm>
 #include <vector>
 
 template<typename... Args>
@@ -12,7 +13,10 @@ public:
 
 	void Add(ActionType action);
 
+	void RemoveAllActions();
+
 	void Invoke(Args... args);
+
 private:
 	std::vector<ActionType> actions;
 };
@@ -46,6 +50,12 @@ template<typename ...Args>
 inline void EventAction<Args...>::Add(ActionType action)
 {
 	actions.push_back(action);
+}
+
+template<typename ...Args>
+inline void EventAction<Args...>::RemoveAllActions()
+{
+	actions.clear();
 }
 
 template<typename ...Args>
