@@ -83,6 +83,9 @@
     <ClCompile Include="CoreLoop.cpp">
       <Filter>Lib\Sources</Filter>
     </ClCompile>
+    <ClCompile Include="EventAction.cpp">
+      <Filter>Lib\Sources\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -120,6 +123,9 @@
     </ClInclude>
     <ClInclude Include="Pyromancer.h">
       <Filter>Game\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="EventAction.h">
+      <Filter>Lib\Headers\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
