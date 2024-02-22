@@ -1,6 +1,5 @@
 #pragma once
 #include <functional>
-#include <algorithm>
 #include <vector>
 
 template<typename... Args>
