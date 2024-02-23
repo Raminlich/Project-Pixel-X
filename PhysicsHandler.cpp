@@ -21,6 +21,10 @@ float PhysicsHandler::GetRotation()
 	return mBody->GetAngle();
 }
 
+void PhysicsHandler::Update()
+{
+}
+
 void PhysicsHandler::Init(b2BodyDef bodyDef, b2FixtureDef fixtureDef)
 {
 	mBody = mWorld->CreateBody(&bodyDef);

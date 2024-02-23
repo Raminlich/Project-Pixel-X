@@ -19,5 +19,7 @@ public:
 
 	float GetRotation();
 
+	void Update();
+
 	~PhysicsHandler();
 };

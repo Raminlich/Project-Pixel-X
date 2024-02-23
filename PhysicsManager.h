@@ -13,6 +13,11 @@ private:
 
 	b2Vec2 gravity;
 	b2World* mWorld = nullptr;
+
+	const float timeStep = 1.0f / 60.0f; //World simulation parameter
+	const int32 velocityIterations = 6; //World simulation parameter
+	const int32 positionIterations = 2; //World simulation parameter
+
 public:
 	PhysicsManager(PhysicsManager& other) = delete;
 	void operator = (const PhysicsManager& other) = delete;
@@ -25,4 +30,7 @@ public:
 
 	//Set world's gravity
 	void SetGravity(Vector2 gravity);
+
+	//Simulates the world (Should be called in core loop update)
+	void Update();
 };

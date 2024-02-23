@@ -4,6 +4,7 @@
 #include "InputManager.h"
 #include "ObjectManager.h"
 #include "ResourceManager.h"
+#include "PhysicsManager.h"
 #include "GameObject.h"
 #include "Transform.h"
 #include "Vector.h"
@@ -91,6 +92,7 @@ void Close()
 	InputManager::ResetInstance();
 	ObjectManager::ResetInstance();
 	ResourceManager::ResetInstance();
+	PhysicsManager::ResetInstance();
 
 	//Quit SDL subsystems
 	IMG_Quit();
@@ -129,9 +131,12 @@ void ProgramUpdate()
 		SDL_RenderClear(gRenderer);
 
 		ObjectManager::GetInstance()->Update();
+		PhysicsManager::GetInstance()->Update();
 
 		SDL_RenderPresent(gRenderer);
 		++countedFrames;
+
+		context->Update();
 	}
 }
 

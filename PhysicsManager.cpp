@@ -37,10 +37,14 @@ b2World* PhysicsManager::GetWorld()
 	return mWorld;
 }
 
-
 void PhysicsManager::SetGravity(Vector2 gravity)
 {
 	this->gravity = b2Vec2(gravity.x, gravity.y);
 	if (mWorld == nullptr) return;
 	mWorld->SetGravity(this->gravity);
+}
+
+void PhysicsManager::Update()
+{
+	mWorld->Step(timeStep, velocityIterations, positionIterations);
 }
