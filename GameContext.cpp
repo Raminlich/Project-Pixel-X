@@ -34,5 +34,9 @@ GameContext::~GameContext()
 {
 	delete pyromancer;
 	std::cout << "Context Ended..." << std::endl;
+}
+
+void GameContext::Update()
+{
 
 }

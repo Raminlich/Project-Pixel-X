@@ -7,8 +7,7 @@ class Component
 public:
 	GameObject* gameObject;
 
-	Component(GameObject* gameObject)
-		: gameObject(gameObject){}
+	Component(GameObject* gameObject);
 
 	virtual void Update() = 0;
 };

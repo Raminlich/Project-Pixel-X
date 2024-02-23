@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 
+class Component;
 class Transform;
 
 class GameObject
@@ -14,12 +15,13 @@ public:
 	Transform* transform;
 	GameObject(const char* name, Vector2 initialPosition, float initialRotation, Transform* parentTransform);
 	virtual ~GameObject();
-	void AddComponent(Component* component);
 	template <typename T>
 	T* GetComponent() const;
 	void Update();
 private :
+	void AddComponent(Component* component);
 	std::vector<Component*> components;
+	friend class Component;
 };
 
 template<typename T>

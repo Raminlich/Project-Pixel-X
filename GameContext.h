@@ -5,5 +5,7 @@ class GameContext
 public:
 	GameContext();
 	~GameContext();
+
+	void Update();
 };
 

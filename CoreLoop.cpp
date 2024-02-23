@@ -132,6 +132,8 @@ void ProgramUpdate()
 
 		SDL_RenderPresent(gRenderer);
 		++countedFrames;
+
+		context->Update();
 	}
 }
 

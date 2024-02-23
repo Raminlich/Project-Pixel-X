@@ -34,8 +34,6 @@ bool Pyromancer::LoadMedia()
 	textureRenderer = new TextureRenderer(gTestGameObject1, "Assets/Pyromancer_Idle.png");
 	animator = new SpriteAnimator(gTestGameObject1, textureRenderer);
 	animator->SetFrames(8, 150, 0, 150, 150);
-	gTestGameObject1->AddComponent(textureRenderer);
-	gTestGameObject1->AddComponent(animator);
 
 	//for GetComponent test
 	auto test = gTestGameObject1->GetComponent<SpriteAnimator>();
