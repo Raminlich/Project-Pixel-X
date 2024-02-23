@@ -45,6 +45,12 @@
     <Filter Include="Lib\Headers\Managers">
       <UniqueIdentifier>{689d40d0-393a-4770-99df-6a790179a83c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lib\Headers\Components\Physics">
+      <UniqueIdentifier>{cbca47d0-f58f-45db-aa96-1da13c6efa81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lib\Sources\Components\Physics">
+      <UniqueIdentifier>{8ad14b33-e181-40a0-86ac-c6280196c03c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Transform.cpp">
@@ -82,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="CoreLoop.cpp">
       <Filter>Lib\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsHandler.cpp">
+      <Filter>Lib\Sources\Components\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +132,9 @@
     </ClInclude>
     <ClInclude Include="EventAction.h">
       <Filter>Lib\Headers\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsHandler.h">
+      <Filter>Lib\Headers\Components\Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
