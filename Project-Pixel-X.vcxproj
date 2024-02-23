@@ -141,6 +141,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="PhysicsHandler.cpp" />
+    <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="Pyromancer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SpriteAnimator.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="PhysicsHandler.h" />
+    <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="Pyromancer.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SpriteAnimator.h" />
