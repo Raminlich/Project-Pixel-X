@@ -10,7 +10,11 @@ public:
 
 	void operator+=(ActionType action);
 
+	void operator-=(ActionType action);
+
 	void Add(ActionType action);
+
+	void Remove(ActionType action);
 
 	void RemoveAllActions();
 
@@ -28,7 +32,11 @@ public:
 
 	void operator+=(ActionType action);
 
+	void operator-=(ActionType action);
+
 	void Add(ActionType action);
+
+	void Remove(ActionType action);
 
 	void RemoveAllActions();
 
@@ -48,9 +56,33 @@ inline void EventAction<Args...>::operator+=(ActionType action)
 }
 
 template<typename ...Args>
+inline void EventAction<Args...>::operator-=(ActionType action)
+{
+	Remove(action);
+}
+
+template<typename ...Args>
 inline void EventAction<Args...>::Add(ActionType action)
 {
 	actions.push_back(action);
+}
+
+template<typename ...Args>
+inline void EventAction<Args...>::Remove(ActionType action)
+{
+	auto it = std::find_if(actions.begin(), actions.end(), [action](const ActionType& a)
+		{
+			return a.target_type() == action.target_type() && a.target<void>() == action.target<void>();
+		});
+	if (it != actions.end())
+	{
+		actions.erase(it);
+		std::cout << "Action found removing it..." << std::endl;
+	}
+	else
+	{
+		std::cout << "Action not found..." << std::endl;
+	}
 }
 
 template<typename ...Args>
@@ -73,9 +105,32 @@ inline void EventAction<void>::operator+=(ActionType action)
 	Add(action);
 }
 
+inline void EventAction<void>::operator-=(ActionType action)
+{
+	Remove(action);
+}
+
 inline void EventAction<void>::Add(ActionType action)
 {
 	actions.push_back(action);
+}
+
+inline void EventAction<void>::Remove(ActionType action)
+{
+	//auto it = std::find(actions.begin(), actions.end(), action);
+	auto it = std::find_if(actions.begin(), actions.end(), [action](const ActionType& a)
+		{
+			return a.target_type() == action.target_type() && a.target<void>() == action.target<void>();
+		});
+	if (it != actions.end())
+	{
+		actions.erase(it);
+		std::cout << "Action found removing it..." << std::endl;
+	}
+	else
+	{
+		std::cout << "Action not found..." << std::endl;
+	}
 }
 
 inline void EventAction<void>::RemoveAllActions()

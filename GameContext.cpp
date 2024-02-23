@@ -7,25 +7,27 @@ Pyromancer* pyromancer;
 EventAction<void> testAction;
 EventAction<int, int> testActionInt;
 
-void Test(int x, int y) 
+void Test(int x, int y)
 {
-	std::cout << "test int " << x << " " << y;
+	std::cout << "test int " << x << " " << y << std::endl;
+}
+
+void TestVoid()
+{
+	std::cout << "test" << std::endl;
 }
 
 GameContext::GameContext()
 {
-	std::cout << "Context Started..."<<std::endl;
+	std::cout << "Context Started..." << std::endl;
 	pyromancer = new Pyromancer();
-	testAction += []()
-		{
-			std::cout << "test"<<std::endl;
-		};
+
+	testAction += TestVoid;
 	testActionInt += Test;
 	testAction.Invoke();
 	testActionInt.Invoke(5, 6);
-
-	testActionInt.RemoveAllActions();
-	testActionInt.Invoke(5, 6);
+	testAction -= TestVoid;
+	testActionInt -= Test;
 }
 
 GameContext::~GameContext()
