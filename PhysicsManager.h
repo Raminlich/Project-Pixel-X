@@ -1,5 +1,7 @@
 #pragma once
 #include "box2d/box2d.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 class Vector2;
 
@@ -24,6 +26,11 @@ public:
 
 	static PhysicsManager* GetInstance();
 	static void ResetInstance();
+
+	//For converting meter unit to pixel unit and vice versa
+	const int MET2PIX = 80;
+	//For converting radian unit to degree and vice versa
+	const float RAD2DEG = 180.0f / M_PI;
 
 	//Returns created world
 	b2World* GetWorld();

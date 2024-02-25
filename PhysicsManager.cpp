@@ -5,8 +5,8 @@ PhysicsManager* PhysicsManager::physicsManager_ = nullptr;
 
 PhysicsManager::PhysicsManager()
 {
-	Vector2 gravity(0,-9.81f);
-	SetGravity(gravity);
+	Vector2 gravity(0,-0.5f);
+	SetGravity(Vector2::WorldToSDL(gravity));
 	mWorld = new b2World(this->gravity);
 }
 
