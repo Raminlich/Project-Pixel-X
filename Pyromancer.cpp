@@ -44,7 +44,7 @@ bool Pyromancer::LoadMedia()
 
 	b2BodyDef boxBodyDef;
 	boxBodyDef.type = b2_dynamicBody;
-	boxBodyDef.position.Set(320/MET2PIX, 0.0f/MET2PIX);
+	boxBodyDef.position.Set(320/MET2PIX,0/MET2PIX);
 	b2PolygonShape boxShape;
 	boxShape.SetAsBox(1.0f/MET2PIX, 1.0f/MET2PIX);
 	b2FixtureDef boxFixtureDef;
@@ -57,9 +57,9 @@ bool Pyromancer::LoadMedia()
 	GameObject* groundGO = ObjectManager::GetInstance()->CreateGameObject("Ground", Vector2(0, 0), 0.0f);
 	b2BodyDef groundBodyDef;
 	groundBodyDef.type = b2_staticBody;
-	groundBodyDef.position.Set(0.0f, 480.0f/MET2PIX);
+	groundBodyDef.position.Set(0.0f, 300/MET2PIX);
 	b2PolygonShape groundShape;
-	groundShape.SetAsBox(50.0f / MET2PIX, 10.0f / MET2PIX);
+	groundShape.SetAsBox(1000.0f / MET2PIX, 10.0f / MET2PIX);
 	b2FixtureDef groundFixtureDef;
 	groundFixtureDef.shape = &groundShape;
 	auto groundPhysicsHandler = new PhysicsHandler(groundGO, groundBodyDef, groundFixtureDef);

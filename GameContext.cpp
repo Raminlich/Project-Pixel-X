@@ -31,5 +31,4 @@ GameContext::~GameContext()
 
 void GameContext::Update()
 {
-
 }
